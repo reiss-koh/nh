@@ -1,11 +1,12 @@
 from data_process_global import *
 from data_process_class import *
 
-process = uniqueAccount(data_path="cus_ifo.csv", excel_or_csv="csv")
+# Check Number of Accounts per Customer
+process = customerAccount(data_path="cus_info.xlsx")
 process.process()
-process.export("cus_acc.csv", excel_or_csv="csv")
+process.export(["cus_acc.csv"], excel_or_csv="csv")
 
+# Reorder Data in Chronological Order for each Customer
 for file_name in RAW_DATA:
-    process1 = chronological(data_path=file_name + ".csv", excel_or_csv="csv")
-    process1.process()
-    process1.export(file_name + "_R1.csv", excel_or_csv="csv")
+    process1 = chronological(data_path=file_name + ".xlsx")
+    process1.export([file_name + "_R1.csv"], excel_or_csv="csv")

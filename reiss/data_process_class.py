@@ -548,45 +548,6 @@ class Week52(DataProcess):
             self.dfs = [self.df]
 
 
-class ReturnETF(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, ETFS=("")):
-        for i in range(len(ETFS)):
-            self.df[ETFS[i] + "_RETURN"] = ["_"] * len(self.df)
-            self.df[ETFS[i] + "_LNRETURN"] = ["_"] * len(self.df)
-
-            for j in range(1, len(self.df)):
-                if self.df.loc[j][ETFS[i] + "_CLOSE"] != 0 and self.df.loc[j - 1][ETFS[i] + "_CLOSE"] != 0:
-                    self.df.at[j, ETFS[i] + "_RETURN"] = pctDel(self.df.loc[j][ETFS[i] + "_CLOSE"],
-                                                                self.df.loc[j - 1][ETFS[i] + "_CLOSE"])
-                    self.df.at[j, ETFS[i] + "_LNRETURN"] = lnReturn(self.df.loc[j][ETFS[i] + "_CLOSE"],
-                                                                    self.df.loc[j - 1][ETFS[i] + "_CLOSE"])
-
-        self.dfs = [self.df]
-
-
-class ReturnEquity(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, EQUITY=("")):
-        for i in range(len(EQUITY)):
-            self.df[EQUITY[i] + "_RETURN"] = ["_"] * len(self.df)
-            self.df[EQUITY[i] + "_LNRETURN"] = ["_"] * len(self.df)
-
-            for j in range(1, len(self.df)):
-                print(i, j)
-                if self.df.loc[j][EQUITY[i]] != 0 and self.df.loc[j - 1][EQUITY[i]] != 0:
-                    self.df.at[j, EQUITY[i] + "_RETURN"] = pctDel(self.df.loc[j][EQUITY[i]],
-                                                                  self.df.loc[j - 1][EQUITY[i]])
-                    self.df.at[j, EQUITY[i] + "_LNRETURN"] = lnReturn(self.df.loc[j][EQUITY[i]],
-                                                                      self.df.loc[j - 1][EQUITY[i]])
-
-        self.dfs = [self.df]
-
-
 class MomentsFirstSecond(DataProcess):
     def __init__(self, data_path):
         super().__init__(data_path=data_path)
@@ -696,40 +657,43 @@ class ProcessCDS5(DataProcess):
 
         self.dfs = [self.df]
 
-class uniqueAccount(DataProcess):
+class customerAccount(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
-    def process(self, metrics=()):
-        self.df["SO2_MEAN"] = ["_"] * self.df_len
+    def process(self):
+        self.df = self.df[["cus_no", "act_no"]]
 
-        for metric in metrics:
-            memory = {}
-            for i in range(self.df_len):
-                print(i)
-                if self.df.loc[i]["Date"] not in memory:
-                    if isinstance(self.df.loc[i][metric], float) or isinstance(self.df.loc[i][metric], int):
-                        memory[self.df.loc[i]["Date"]] = []
-                        memory[self.df.loc[i]["Date"]].append(self.df.loc[i][metric])
-                elif self.df.loc[i]["Date"] in memory:
-                    if isinstance(self.df.loc[i][metric], float) or isinstance(self.df.loc[i][metric], int):
-                        memory[self.df.loc[i]["Date"]].append(self.df.loc[i][metric])
+        memory = {}
 
-            i = 0
-            for key, list in memory.items():
-                list_clean = [x for x in list if np.isnan(x) == False]
-                print(key)
-                self.df.at[i, metric + "_MEAN"] = np.mean(list_clean)
-                self.df.at[i, metric + "_STDDEV"] = np.std(list_clean)
-                i += 1
+        for i in range(len(self.df)):
+            if self.df.loc[i]["cus_no"] not in memory:
+                memory[self.df.loc[i]["cus_no"]] = [self.df.loc[i]["act_no"]]
+            elif self.df.loc[i]["cus_no"] in memory:
+                if self.df.loc[i]["act_no"] not in memory[self.df.loc[i]["cus_no"]]:
+                    memory[self.df.loc[i]["cus_no"]].append(self.df.loc[i])
 
-        self.dfs = [self.df]
+        self.df1 = pd.DataFrame()
+        self.df1["Customer"] = ["_"] * len(memory)
+        self.df1["Account Number"] = ["_"] * len(memory)
+
+        j = 0
+        for key, value in memory.items():
+            self.df1.at[j, "Customer"] = key
+            self.df1.at[j, "Account Number"] = len(value)
+            j += 1
+
+        for i in range(len(self.df1)):
+            if self.df1.loc[i]["Account Number"] != 1:
+                print("Not 1 Found")
+
+        self.dfs = [self.df1]
 
 class chronological(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
-    def process(self, metrics=()):
+    def process(self):
         self.df["SO2_MEAN"] = ["_"] * self.df_len
 
         for metric in metrics:
