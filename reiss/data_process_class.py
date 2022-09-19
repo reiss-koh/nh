@@ -689,31 +689,50 @@ class customerAccount(DataProcess):
 
         self.dfs = [self.df1]
 
+
 class chronological(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self):
-        self.df["SO2_MEAN"] = ["_"] * self.df_len
+        print(self.df)
 
-        for metric in metrics:
-            memory = {}
-            for i in range(self.df_len):
-                print(i)
-                if self.df.loc[i]["Date"] not in memory:
-                    if isinstance(self.df.loc[i][metric], float) or isinstance(self.df.loc[i][metric], int):
-                        memory[self.df.loc[i]["Date"]] = []
-                        memory[self.df.loc[i]["Date"]].append(self.df.loc[i][metric])
-                elif self.df.loc[i]["Date"] in memory:
-                    if isinstance(self.df.loc[i][metric], float) or isinstance(self.df.loc[i][metric], int):
-                        memory[self.df.loc[i]["Date"]].append(self.df.loc[i][metric])
+        current_acc = ""
+        chronological_list = []
+        chronological_index_list = []
+        self.df1 = pd.DataFrame()
 
-            i = 0
-            for key, list in memory.items():
-                list_clean = [x for x in list if np.isnan(x) == False]
-                print(key)
-                self.df.at[i, metric + "_MEAN"] = np.mean(list_clean)
-                self.df.at[i, metric + "_STDDEV"] = np.std(list_clean)
-                i += 1
+        for i in range(1000):
+            print(i)
+            if self.df.loc[i]["act_no"] == "":
+                current_acc = self.df.loc[i]["act_no"]
+            elif self.df.loc[i]["act_no"] == current_acc:
+                if len(chronological_index_list) == 0:
+                    chronological_list.append(self.df.loc[i]["bse_ym"])
+                    chronological_index_list.append(i)
+                else:
+                    for j in range(len(chronological_index_list)):
+                        if self.df.loc[j]["bse_ym"] < chronological_list[j]:
+                            chronological_list.insert(j, self.df.loc[j]["bse_ym"])
+                            chronological_index_list.insert(j, i)
+            elif self.df.loc[i]["act_no"] != current_acc:
+                k = 0
+                for j in chronological_index_list:
+                    for column in self.df.columns:
+                        self.df1.at[k, column] == self.df.loc[j][column]
+                    k += 1
 
-        self.dfs = [self.df]
+                current_acc = self.df.loc[i]["act_no"]
+                chronological_list = []
+                chronological_index_list = []
+
+                if len(chronological_index_list) == 0:
+                    chronological_list.append(self.df.loc[i]["bse_ym"])
+                    chronological_index_list.append(i)
+                else:
+                    for j in range(len(chronological_index_list)):
+                        if self.df.loc[j]["bse_ym"] < chronological_list[j]:
+                            chronological_list.insert(j, self.df.loc[j]["bse_ym"])
+                            chronological_index_list.insert(j, i)
+
+        self.dfs = [self.df1]
