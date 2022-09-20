@@ -806,12 +806,14 @@ class renameCusAcc(DataProcess):
         current_cus = ""
         current_acc = ""
         j = 0
+        acc_dict = {}
 
         for i in range(self.df_len):
             print(i)
             if current_cus == "" and current_acc == "":
                 current_cus = self.df.loc[i]["cus_no"]
                 current_acc = self.df.loc[i]["act_no"]
+                acc_dict[self.df.loc[i]["act_no"]] = j
 
                 self.df.at[i, "cus_no"] = "cus_" + str(j)
                 self.df.at[i, "act_no"] = "acc_" + str(j)
@@ -823,6 +825,45 @@ class renameCusAcc(DataProcess):
                 current_acc = self.df.loc[i]["act_no"]
 
                 j += 1
+
+                acc_dict[self.df.loc[i]["act_no"]] = j
+
+                self.df.at[i, "cus_no"] = "cus_" + str(j)
+                self.df.at[i, "act_no"] = "acc_" + str(j)
+
+        self.dfs = [self.df]
+
+        return acc_dict
+
+class renameCusAcc1(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, acc_dict={}):
+        current_cus = ""
+        current_acc = ""
+        j = 0
+        acc_dict = {}
+
+        for i in range(self.df_len):
+            print(i)
+            if current_cus == "" and current_acc == "":
+                current_cus = self.df.loc[i]["cus_no"]
+                current_acc = self.df.loc[i]["act_no"]
+                acc_dict[self.df.loc[i]["act_no"]] = j
+
+                self.df.at[i, "cus_no"] = "cus_" + str(j)
+                self.df.at[i, "act_no"] = "acc_" + str(j)
+            elif current_cus == self.df.loc[i]["cus_no"] and current_acc == self.df.loc[i]["act_no"]:
+                self.df.at[i, "cus_no"] = "cus_" + str(j)
+                self.df.at[i, "act_no"] = "acc_" + str(j)
+            elif current_cus != self.df.loc[i]["cus_no"] and current_acc != self.df.loc[i]["act_no"]:
+                current_cus = self.df.loc[i]["cus_no"]
+                current_acc = self.df.loc[i]["act_no"]
+
+                j += 1
+
+                acc_dict[self.df.loc[i]["act_no"]] = j
 
                 self.df.at[i, "cus_no"] = "cus_" + str(j)
                 self.df.at[i, "act_no"] = "acc_" + str(j)

@@ -29,5 +29,10 @@ from data_process_class import *
 
 # Rename Customers and Accounts
 process4 = renameCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
-process4.process()
+acc_dict = process4.process()
 process4.export(["cus_info_R3.csv"], excel_or_csv="csv")
+
+for file_name in DATA_PATH:
+    process5 = renameCusAcc1(data_path=file_name + ".csv", excel_or_csv="csv")
+    process5.process(acc_dict=acc_dict)
+    process5.export([file_name + "_R2.csv"], excel_or_csv="csv")
