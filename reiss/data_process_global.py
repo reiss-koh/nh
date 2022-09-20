@@ -12,15 +12,12 @@ DATA_PATH = ("kr_equity",
 DATA_PATH1 = ("os_equity",
               "cus_account")
 
-DATA_PATH2 = ()
+DATA_PATH2 = ("cus_account_R3",
+              "cus_assets_R1",
+              "kr_equity_R2",
+              "os_equity_R3")
 
-FX = {"USD": 0,
-      "HKD": 1,
-      "JPY": 2,
-      "CNY": 3,
-      "AUD": 4,
-      "EUR": 5,
-      "GBP": 6,
-      "VND": 7,
-      "KRW": 8,
-      "IDR": 9}
+DATA_PATH3 = ("cus_account",
+              "cus_assets",
+              "kr_equity",
+              "os_equity")

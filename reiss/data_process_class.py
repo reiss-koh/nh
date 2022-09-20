@@ -872,3 +872,23 @@ class oneHotFX(DataProcess):
         self.df.drop("cur_cd", axis=1, inplace=True)
 
         self.dfs = [self.df]
+
+class accToNum(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            self.df.at[i, "act_no"] = int(self.df.loc[i]["act_no"][4:])
+
+        self.dfs = [self.df]
+
+class sortByAcc(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        self.df = self.df.sort_values(by="act_no", ascending=True, kind="mergesort")  # mergesort is stable
+
+        self.dfs = [self.df]

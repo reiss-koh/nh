@@ -50,3 +50,13 @@ from data_process_class import *
 
 # Order Accounts Ascending for All Files
 # Make All Revision to R4 for Comparability
+# for file_name in DATA_PATH2:
+#     process8 = accToNum(data_path=file_name + ".csv", excel_or_csv="csv")
+#     process8.process()
+#     process8.export([file_name[:-3] + "_R4.csv"], excel_or_csv="csv")
+
+for file_name in DATA_PATH3:
+    process9 = sortByAcc(data_path=file_name + "_R4.csv", excel_or_csv="csv")
+    process9.process()  # merge sort is used for stability
+    process9.export([file_name + "_R5.csv"], excel_or_csv="csv")
+
