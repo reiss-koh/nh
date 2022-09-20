@@ -777,3 +777,23 @@ class yesNo(DataProcess):
                     self.df.at[i, column] = 0
 
         self.dfs = [self.df]
+
+class uniqueFX(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self, column=""):
+        unique_fx = []
+
+        for i in range(self.df_len):
+            if self.df.loc[i][column] not in unique_fx:
+                unique_fx.append(self.df.loc[i][column])
+
+        for i in range(len(self.df1)):
+            if self.df1.loc[i][column] not in unique_fx:
+                unique_fx.append(self.df1.loc[i][column])
+
+        for fx in unique_fx:
+            print(fx)
+
+        self.dfs = [self.df]
