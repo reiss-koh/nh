@@ -762,3 +762,18 @@ class chronological2(DataProcess):
                 self.df_output = self.df_output.append(self.df1, ignore_index=True)
 
         self.dfs = [self.df_output]
+
+class yesNo(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, columns=[]):
+        for column in columns:
+            for i in range(self.df_len):
+                print(i)
+                if self.df.loc[i][column] == "Y":
+                    self.df.at[i, column] = 1
+                elif self.df.loc[i][column] == "N":
+                    self.df.at[i, column] = 0
+
+        self.dfs = [self.df]
