@@ -23,6 +23,11 @@ from data_process_class import *
 # process2.export(["cus_info" + "_R2.csv"], excel_or_csv="csv")
 
 # Check Number of Unique Currencies in Data
-process3 = uniqueFX(data_path="os_equity_R1.csv", data_path1="cus_account_R1.csv", excel_or_csv="csv")
-process3.process(column="cur_cd")
+# process3 = uniqueFX(data_path="os_equity_R1.csv", data_path1="cus_account_R1.csv", excel_or_csv="csv")
+# process3.process(column="cur_cd")
 # Added Dictionary in data_process_global.py
+
+# Rename Customers and Accounts
+process4 = renameCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
+process4.process()
+process4.export(["cus_info_R3.csv"], excel_or_csv="csv")

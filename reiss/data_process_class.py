@@ -797,3 +797,34 @@ class uniqueFX(DataProcess):
             print(fx)
 
         self.dfs = [self.df]
+
+class renameCusAcc(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        current_cus = ""
+        current_acc = ""
+        j = 0
+
+        for i in range(self.df_len):
+            print(i)
+            if current_cus == "" and current_acc == "":
+                current_cus = self.df.loc[i]["cus_no"]
+                current_acc = self.df.loc[i]["act_no"]
+
+                self.df.at[i, "cus_no"] = "cus_" + str(j)
+                self.df.at[i, "act_no"] = "acc_" + str(j)
+            elif current_cus == self.df.loc[i]["cus_no"] and current_acc == self.df.loc[i]["act_no"]:
+                self.df.at[i, "cus_no"] = "cus_" + str(j)
+                self.df.at[i, "act_no"] = "acc_" + str(j)
+            elif current_cus != self.df.loc[i]["cus_no"] and current_acc != self.df.loc[i]["act_no"]:
+                current_cus = self.df.loc[i]["cus_no"]
+                current_acc = self.df.loc[i]["act_no"]
+
+                j += 1
+
+                self.df.at[i, "cus_no"] = "cus_" + str(j)
+                self.df.at[i, "act_no"] = "acc_" + str(j)
+
+        self.dfs = [self.df]
