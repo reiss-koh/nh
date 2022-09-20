@@ -28,16 +28,22 @@ from data_process_class import *
 # Added Dictionary in data_process_global.py
 
 # Rename Customers and Accounts
-process4 = renameCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
-acc_dict = process4.process()
-process4.export(["cus_info_R3.csv"], excel_or_csv="csv")
+# process4 = renameCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
+# acc_dict = process4.process()
+# process4.export(["cus_info_R3.csv"], excel_or_csv="csv")
 
 # Rename Accounts and Drop Customers since each account observation maps to a unique customer observation
-for file_name in DATA_PATH:
-    process5 = renameCusAcc1(data_path=file_name + "_R1.csv", excel_or_csv="csv")
-    process5.process(acc_dict=acc_dict)
-    process5.export([file_name + "_R2.csv"], excel_or_csv="csv")
+# for file_name in DATA_PATH:
+#     process5 = renameCusAcc1(data_path=file_name + "_R1.csv", excel_or_csv="csv")
+#     process5.process(acc_dict=acc_dict)
+#     process5.export([file_name + "_R2.csv"], excel_or_csv="csv")
+#
+# process6 = renameCusAcc2(data_path="cus_assets.xlsx")
+# process6.process(acc_dict=acc_dict)
+# process6.export(["cus_assets_R1.csv"], excel_or_csv="csv")
 
-process6 = renameCusAcc2(data_path="cus_assets.xlsx")
-process6.process(acc_dict=acc_dict)
-process6.export(["cus_assets_R1.csv"], excel_or_csv="csv")
+# One Hot Encode FX
+for file_name in DATA_PATH1:
+    process7 = oneHotFX(data_path=file_name + "_R2.csv", excel_or_csv="csv")
+    process7.process()
+    process7.export([file_name + "_R3.csv"], excel_or_csv="csv")

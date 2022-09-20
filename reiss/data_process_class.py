@@ -860,3 +860,15 @@ class renameCusAcc2(DataProcess):
             self.df.at[i, "act_no"] = acc_dict[self.df.loc[i, "act_no"]]
 
         self.dfs = [self.df]
+
+class oneHotFX(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        self.df1 = pd.get_dummies(self.df.cur_cd, prefix='FX')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("cur_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
