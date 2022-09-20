@@ -1,6 +1,6 @@
 
-RAW_DATA = ("cus_info",  # Information
-            "kr_equity",  # Korean Equity Trades
-            "os_equity",  # Overseas Equity Trades
-            "cus_assets",  # Assets
-            "cus_account")  # Account
+RAW_DATA = ("cus_info",
+            "cus_account")
+
+RAW_DATA1 = ("kr_equity",
+             "os_equity")

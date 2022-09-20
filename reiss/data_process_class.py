@@ -1,3 +1,4 @@
+import pandas
 import pandas as pd
 import numpy as np
 from numpy import nan
@@ -689,50 +690,75 @@ class customerAccount(DataProcess):
 
         self.dfs = [self.df1]
 
-
+# previous code, very bad, ignore
 class chronological(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self):
-        print(self.df)
-
         current_acc = ""
         chronological_list = []
         chronological_index_list = []
         self.df1 = pd.DataFrame()
 
-        for i in range(1000):
+        k = 0
+
+        for i in range(50):
             print(i)
-            if self.df.loc[i]["act_no"] == "":
-                current_acc = self.df.loc[i]["act_no"]
-            elif self.df.loc[i]["act_no"] == current_acc:
-                if len(chronological_index_list) == 0:
-                    chronological_list.append(self.df.loc[i]["bse_ym"])
-                    chronological_index_list.append(i)
-                else:
-                    for j in range(len(chronological_index_list)):
-                        if self.df.loc[j]["bse_ym"] < chronological_list[j]:
-                            chronological_list.insert(j, self.df.loc[j]["bse_ym"])
-                            chronological_index_list.insert(j, i)
+            current_acc = self.df.loc[i]["act_no"]
+            chronological_list.append(self.df.loc[i]["bse_ym"])
+            chronological_index_list.append(i)
+
+            if self.df.loc[i]["act_no"] == current_acc:
+                for j in range(len(chronological_index_list)):
+                    if self.df.loc[j]["bse_ym"] < chronological_list[j]:
+                        chronological_list.insert(j, self.df.loc[i]["bse_ym"])
+                        chronological_index_list.insert(j, i)
+                    elif self.df.loc[j]["bse_ym"] > chronological_list[-1]:
+                        chronological_list.append(self.df.loc[j]["bse_ym"])
+                        chronological_index_list.append(i)
             elif self.df.loc[i]["act_no"] != current_acc:
-                k = 0
                 for j in chronological_index_list:
                     for column in self.df.columns:
-                        self.df1.at[k, column] == self.df.loc[j][column]
+                        self.df1.at[k, column] = self.df.loc[j][column]
                     k += 1
 
                 current_acc = self.df.loc[i]["act_no"]
-                chronological_list = []
-                chronological_index_list = []
-
-                if len(chronological_index_list) == 0:
-                    chronological_list.append(self.df.loc[i]["bse_ym"])
-                    chronological_index_list.append(i)
-                else:
-                    for j in range(len(chronological_index_list)):
-                        if self.df.loc[j]["bse_ym"] < chronological_list[j]:
-                            chronological_list.insert(j, self.df.loc[j]["bse_ym"])
-                            chronological_index_list.insert(j, i)
+                chronological_list = [self.df.loc[i]["bse_ym"]]
+                chronological_index_list = [i]
 
         self.dfs = [self.df1]
+
+# new code, efficient, good
+class chronological2(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, sort_by="bse_ym"):
+        pd.set_option("display.max_rows", None, "display.max_columns", None)
+        self.df_output = pd.DataFrame()
+        current_acc = ""
+        for i in range(self.df_len):
+            print(i)
+            if current_acc == "":
+                current_acc = self.df.loc[i]["act_no"]
+                indicies = [0]
+            elif current_acc == self.df.loc[i]["act_no"]:
+                indicies.append(i)
+            elif current_acc != self.df.loc[i]["act_no"]:
+
+                self.df1 = pd.DataFrame()
+                self.df1 = self.df.iloc[indicies, :]
+                self.df1 = self.df1.sort_values(by=sort_by, ascending=True)
+                self.df_output = self.df_output.append(self.df1, ignore_index=True)
+
+                current_acc = self.df.loc[i]["act_no"]
+                indicies = [i]
+
+            if i == self.df_len-1:
+                self.df1 = pd.DataFrame()
+                self.df1 = self.df.iloc[indicies, :]
+                self.df1 = self.df1.sort_values(by=sort_by, ascending=True)
+                self.df_output = self.df_output.append(self.df1, ignore_index=True)
+
+        self.dfs = [self.df_output]
