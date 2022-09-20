@@ -43,8 +43,6 @@ class Autoencoder(nn.Module):
         return decoded
 
 #Autoencoder에 넣어보기 위해 예시 csv 전처리
-print(os.getcwd())
-sys.exit()
 df = pd.read_csv(f'{os.getcwd()}/reiss/cus_ifo.csv')
 df = df.iloc[:,3:]
 del df['stk_pdt_hld_yn']

@@ -52,7 +52,7 @@ class ConvAutoEncoder(nn.Module):
         return output
 
 #Autoencoder에 넣어보기 위해 예시 csv 전처리
-df = pd.read_csv('cus_ifo.csv')
+df = pd.read_csv(f'{os.getcwd()}/reiss/cus_ifo.csv')
 df = df.iloc[:,3:]
 del df['stk_pdt_hld_yn']
 del df['ose_stk_pdt_hld_yn']
