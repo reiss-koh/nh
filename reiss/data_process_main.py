@@ -43,7 +43,10 @@ from data_process_class import *
 # process6.export(["cus_assets_R1.csv"], excel_or_csv="csv")
 
 # One Hot Encode FX
-for file_name in DATA_PATH1:
-    process7 = oneHotFX(data_path=file_name + "_R2.csv", excel_or_csv="csv")
-    process7.process()
-    process7.export([file_name + "_R3.csv"], excel_or_csv="csv")
+# for file_name in DATA_PATH1:
+#     process7 = oneHotFX(data_path=file_name + "_R2.csv", excel_or_csv="csv")
+#     process7.process()
+#     process7.export([file_name + "_R3.csv"], excel_or_csv="csv")
+
+# Order Accounts Ascending for All Files
+# Make All Revision to R4 for Comparability

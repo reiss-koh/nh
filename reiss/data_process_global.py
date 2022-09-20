@@ -12,6 +12,8 @@ DATA_PATH = ("kr_equity",
 DATA_PATH1 = ("os_equity",
               "cus_account")
 
+DATA_PATH2 = ()
+
 FX = {"USD": 0,
       "HKD": 1,
       "JPY": 2,
