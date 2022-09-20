@@ -5,9 +5,9 @@ RAW_DATA = ("cus_info",
 RAW_DATA1 = ("kr_equity",
              "os_equity")
 
-DATA_PATH = ("kr_equity_R1",
-             "os_equity_R1",
-             "cus_account_R1")
+DATA_PATH = ("kr_equity",
+             "os_equity",
+             "cus_account")
 
 FX = {"USD": 0,
       "HKD": 1,
