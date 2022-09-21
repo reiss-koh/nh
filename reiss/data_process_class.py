@@ -892,3 +892,15 @@ class sortByAcc(DataProcess):
         self.df = self.df.sort_values(by="act_no", ascending=True, kind="mergesort")  # mergesort is stable
 
         self.dfs = [self.df]
+
+class dropColumns(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        for column in self.df:
+            if "Unnamed" in column:
+                self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]

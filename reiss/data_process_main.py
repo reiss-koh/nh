@@ -55,8 +55,14 @@ from data_process_class import *
 #     process8.process()
 #     process8.export([file_name[:-3] + "_R4.csv"], excel_or_csv="csv")
 
-for file_name in DATA_PATH3:
-    process9 = sortByAcc(data_path=file_name + "_R4.csv", excel_or_csv="csv")
-    process9.process()  # merge sort is used for stability
-    process9.export([file_name + "_R5.csv"], excel_or_csv="csv")
+# for file_name in DATA_PATH3:
+#     process9 = sortByAcc(data_path=file_name + "_R4.csv", excel_or_csv="csv")
+#     process9.process()  # merge sort is used for stability
+#     process9.export([file_name + "_R5.csv"], excel_or_csv="csv")
 
+# Remove Unnecessary Index Columns
+# Make All Revision to R6 for Comparability
+for file_name in DATA_PATH4:
+    process10 = dropColumns(data_path=file_name + ".csv", excel_or_csv="csv")
+    process10.process()
+    process10.export([file_name[:-3] + "_R6.csv"], excel_or_csv="csv")
