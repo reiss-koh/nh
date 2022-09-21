@@ -75,6 +75,15 @@ from data_process_class import *
 # process12.process()
 # process12.export(["cus_info_R8.csv"], excel_or_csv="csv")
 
-process13 = oneHotSex(data_path="cus_info_R8" + ".csv", excel_or_csv="csv")
-process13.process()
-process13.export(["cus_info_R9.csv"], excel_or_csv="csv")
+# process13 = oneHotSex(data_path="cus_info_R8" + ".csv", excel_or_csv="csv")
+# process13.process()
+# process13.export(["cus_info_R9.csv"], excel_or_csv="csv")
+
+# process14 = processAge(data_path="cus_info_R9" + ".csv", excel_or_csv="csv")
+# process14.process()
+# process14.export(["cus_info_R10.csv"], excel_or_csv="csv")
+
+process15 = regroupSecurity(data_path="cus_info_R10" + ".csv", excel_or_csv="csv")
+process15.process()
+process15.export(["cus_info_R11.csv"], excel_or_csv="csv")
+
