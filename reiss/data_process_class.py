@@ -400,7 +400,7 @@ class regroupSecurity(DataProcess):
 
     def process(self):
 
-        
+
 
         for i in range(self.df_len):
 
