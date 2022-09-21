@@ -62,7 +62,19 @@ from data_process_class import *
 
 # Remove Unnecessary Index Columns
 # Make All Revision to R6 for Comparability
-for file_name in DATA_PATH4:
-    process10 = dropColumns(data_path=file_name + ".csv", excel_or_csv="csv")
-    process10.process()
-    process10.export([file_name[:-3] + "_R6.csv"], excel_or_csv="csv")
+# for file_name in DATA_PATH4:
+#     process10 = dropUnnamed(data_path=file_name + ".csv", excel_or_csv="csv")
+#     process10.process()
+#     process10.export([file_name[:-3] + "_R6.csv"], excel_or_csv="csv")
+
+# process11 = accToNum(data_path="cus_info_R6" + ".csv", excel_or_csv="csv")
+# process11.process(drop="cus_no")
+# process11.export(["cus_info_R7.csv"], excel_or_csv="csv")
+
+# process12 = monthlyAccessCount(data_path="cus_info_R7" + ".csv", excel_or_csv="csv")
+# process12.process()
+# process12.export(["cus_info_R8.csv"], excel_or_csv="csv")
+
+process13 = oneHotSex(data_path="cus_info_R8" + ".csv", excel_or_csv="csv")
+process13.process()
+process13.export(["cus_info_R9.csv"], excel_or_csv="csv")

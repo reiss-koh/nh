@@ -735,7 +735,6 @@ class chronological2(DataProcess):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self, sort_by="bse_ym"):
-        pd.set_option("display.max_rows", None, "display.max_columns", None)
         self.df_output = pd.DataFrame()
         current_acc = ""
         for i in range(self.df_len):
@@ -877,7 +876,11 @@ class accToNum(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
-    def process(self):
+    def process(self, drop=""):
+
+        if drop != "":
+            self.df = self.df.drop([drop], axis=1)
+
         for i in range(self.df_len):
             print(i)
             self.df.at[i, "act_no"] = int(self.df.loc[i]["act_no"][4:])
@@ -893,7 +896,7 @@ class sortByAcc(DataProcess):
 
         self.dfs = [self.df]
 
-class dropColumns(DataProcess):
+class dropUnnamed(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
@@ -902,5 +905,66 @@ class dropColumns(DataProcess):
         for column in self.df:
             if "Unnamed" in column:
                 self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]
+
+class monthlyAccessCount(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            arr = list(str(self.df.loc[i]["mts_mm_access_type"]))
+
+            sum = 0
+            for j in arr:
+                sum += int(j)
+
+            self.df.at[i, "mts_mm_access_type"] = sum
+
+        self.dfs = [self.df]
+
+class oneHotSex(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        pd.set_option("display.max_columns", None)
+        for i in range(self.df_len):
+
+            if self.df.loc[i]["sex_dit_cd"] == 1:
+                self.df.at[i, "sex_dit_cd"] = "M"
+            elif self.df.loc[i]["sex_dit_cd"] == 2:
+                self.df.at[i, "sex_dit_cd"] = "F"
+            elif self.df.loc[i]["sex_dit_cd"] == 99:
+                self.df.at[i, "sex_dit_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.sex_dit_cd, prefix='SEX')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("sex_dit_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+class processAge(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        pd.set_option("display.max_columns", None)
+        for i in range(self.df_len):
+
+            if self.df.loc[i]["sex_dit_cd"] == 1:
+                self.df.at[i, "sex_dit_cd"] = "M"
+            elif self.df.loc[i]["sex_dit_cd"] == 2:
+                self.df.at[i, "sex_dit_cd"] = "F"
+            elif self.df.loc[i]["sex_dit_cd"] == 99:
+                self.df.at[i, "sex_dit_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.sex_dit_cd, prefix='SEX')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("sex_dit_cd", axis=1, inplace=True)
 
         self.dfs = [self.df]
