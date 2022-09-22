@@ -399,10 +399,36 @@ class regroupSecurity(DataProcess):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self):
-
-
+        low_risk = ("1", "15", "14", "13", "12", "11", "10")
+        mid_risk = ("9", "8", "7", "6")
+        high_risk = ("5", "4", "3", "2")
+        na = ("99")
 
         for i in range(self.df_len):
+            print(i)
+            if str(self.df.loc[i]["mrz_pdt_tp_sgm_cd"]) in low_risk:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 1
+            elif str(self.df.loc[i]["mrz_pdt_tp_sgm_cd"]) in mid_risk:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 2
+            elif str(self.df.loc[i]["mrz_pdt_tp_sgm_cd"]) in high_risk:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 3
+            elif str(self.df.loc[i]["mrz_pdt_tp_sgm_cd"]) in na:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = "NA"
 
+        self.dfs = [self.df]
+
+class lifestageProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["lsg_sgm_cd"] == 99:
+                self.df.at[i, "lsg_sgm_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.lsg_sgm_cd, prefix='LIFESTAGE')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("lsg_sgm_cd", axis=1, inplace=True)
 
         self.dfs = [self.df]

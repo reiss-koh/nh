@@ -83,7 +83,10 @@ from data_process_class import *
 # process14.process()
 # process14.export(["cus_info_R10.csv"], excel_or_csv="csv")
 
-process15 = regroupSecurity(data_path="cus_info_R10" + ".csv", excel_or_csv="csv")
-process15.process()
-process15.export(["cus_info_R11.csv"], excel_or_csv="csv")
+# process15 = regroupSecurity(data_path="cus_info_R10" + ".csv", excel_or_csv="csv")
+# process15.process()
+# process15.export(["cus_info_R11.csv"], excel_or_csv="csv")
 
+process16 = lifestageProcess(data_path="cus_info_R11" + ".csv", excel_or_csv="csv")
+process16.process()
+process16.export(["cus_info_R12.csv"], excel_or_csv="csv")
