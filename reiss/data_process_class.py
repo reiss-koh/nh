@@ -432,3 +432,72 @@ class lifestageProcess(DataProcess):
         self.df.drop("lsg_sgm_cd", axis=1, inplace=True)
 
         self.dfs = [self.df]
+
+class customerLvlProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        dict = {1: 7,
+                2: 6,
+                3: 5,
+                4: 4,
+                5: 3,
+                9: 2,
+                99: 1}
+
+        for i in range(self.df_len):
+            self.df.at[i, "tco_cus_grd_cd"] = dict[self.df.loc[i]["tco_cus_grd_cd"]]
+
+        self.dfs = [self.df]
+
+class totalDurationInvestingProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["tot_ivs_te_sgm_cd"] == 99:
+                self.df.at[i, "tot_ivs_te_sgm_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+class holdingsTypeProcessing(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["hld_pdt_tp_sgm_cd"] == 99:
+                self.df.at[i, "hld_pdt_tp_sgm_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.hld_pdt_tp_sgm_cd, prefix='HOLDINGS_TYPE')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("hld_pdt_tp_sgm_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+class loyaltyProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        dict = {1: 6,
+                2: 5,
+                3: 4,
+                4: 3,
+                5: 2,
+                6: 1}
+
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i]["loy_sgm_cd"] == 99:
+                self.df.at[i, "loy_sgm_cd"] = "NA"
+            elif self.df.loc[i]["loy_sgm_cd"] in dict:
+                self.df.at[i, "loy_sgm_cd"] = dict[self.df.loc[i]["loy_sgm_cd"]]
+            else:
+                self.df.at[i, "loy_sgm_cd"] = "NA"
+
+        self.dfs = [self.df]
