@@ -1,3 +1,9 @@
+def can_convert_to_int(string):
+    try:
+        int(string)
+        return True
+    except ValueError:
+        return False
 
 RAW_DATA = ("cus_info",
             "cus_account")

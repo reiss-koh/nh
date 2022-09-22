@@ -608,10 +608,10 @@ class tradeFrequencyProcess(DataProcess):
                       11: 1}
 
         for i in range(self.df_len):
-            if self.df.loc[i]["bas_stk_trd_tp_cd"] == 99 or self.df.loc[i]["bas_stk_trd_tp_cd"] == "_":
+            if self.df.loc[i]["bas_stk_trd_tp_cd"] == 99:
                 self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"
-            elif int(self.df.loc[i]["bas_stk_trd_tp_cd"]) in dictionary:
-                self.df.at[i, "bas_stk_trd_tp_cd"] = dictionary[self.df.loc[i]["bas_stk_trd_tp_cd"]]
+            if can_convert_to_int(self.df.loc[i]["bas_stk_trd_tp_cd"]):
+                self.df.at[i, "bas_stk_trd_tp_cd"] = dictionary[int(self.df.loc[i]["bas_stk_trd_tp_cd"])]
             else:
                 self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"
 
