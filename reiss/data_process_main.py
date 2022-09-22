@@ -86,19 +86,35 @@ from data_process_class import *
 # process15 = regroupSecurity(data_path="cus_info_R10" + ".csv", excel_or_csv="csv")
 # process15.process()
 # process15.export(["cus_info_R11.csv"], excel_or_csv="csv")
-
+#
 # process16 = lifestageProcess(data_path="cus_info_R11" + ".csv", excel_or_csv="csv")
 # process16.process()
 # process16.export(["cus_info_R12.csv"], excel_or_csv="csv")
-
+#
 # process17 = totalDurationInvestingProcess(data_path="cus_info_R13" + ".csv", excel_or_csv="csv")
 # process17.process()
 # process17.export(["cus_info_R14.csv"], excel_or_csv="csv")
-
+#
 # process18 = holdingsTypeProcessing(data_path="cus_info_R14" + ".csv", excel_or_csv="csv")
 # process18.process()
 # process18.export(["cus_info_R15.csv"], excel_or_csv="csv")
+#
+# process19 = loyaltyProcess(data_path="cus_info_R15" + ".csv", excel_or_csv="csv")
+# process19.process()
+# process19.export(["cus_info_R16.csv"], excel_or_csv="csv")
 
-process19 = loyaltyProcess(data_path="cus_info_R15" + ".csv", excel_or_csv="csv")
-process19.process()
-process19.export(["cus_info_R16.csv"], excel_or_csv="csv")
+# process20 = mainMarketProcess(data_path="cus_info_R16" + ".csv", excel_or_csv="csv")
+# process20.process()
+# process20.export(["cus_info_R17.csv"], excel_or_csv="csv")
+
+# process21 = mainSectorProcess(data_path="cus_info_R17" + ".csv", excel_or_csv="csv")
+# process21.process()
+# process21.export(["cus_info_R18.csv"], excel_or_csv="csv")
+
+# process22 = netWorthProcess(data_path="cus_info_R18" + ".csv", excel_or_csv="csv")
+# process22.process()
+# process22.export(["cus_info_R19.csv"], excel_or_csv="csv")
+
+process23 = tradeFrequencyProcess(data_path="cus_info_R19" + ".csv", excel_or_csv="csv")
+process23.process()
+process23.export(["cus_info_R20.csv"], excel_or_csv="csv")
