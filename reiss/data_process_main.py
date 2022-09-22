@@ -115,6 +115,10 @@ from data_process_class import *
 # process22.process()
 # process22.export(["cus_info_R19.csv"], excel_or_csv="csv")
 
-process23 = tradeFrequencyProcess(data_path="cus_info_R19" + ".csv", excel_or_csv="csv")
-process23.process()
-process23.export(["cus_info_R20.csv"], excel_or_csv="csv")
+# process23 = tradeFrequencyProcess(data_path="cus_info_R19" + ".csv", excel_or_csv="csv")
+# process23.process()
+# process23.export(["cus_info_R20.csv"], excel_or_csv="csv")
+
+process24 = dropColumn(data_path="cus_assets_R6.csv", excel_or_csv="csv")
+process24.process(column_name="mts_mm_access_type")
+process24.export(["cus_assets_R7.csv"], excel_or_csv="csv")

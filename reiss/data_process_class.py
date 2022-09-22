@@ -616,3 +616,12 @@ class tradeFrequencyProcess(DataProcess):
                 self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"
 
         self.dfs = [self.df]
+
+class dropColumn(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, column_name="Unnamed"):
+        self.df = self.df.drop([column_name], axis=1)
+
+        self.dfs = [self.df]
