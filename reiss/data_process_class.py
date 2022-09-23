@@ -625,3 +625,23 @@ class dropColumn(DataProcess):
         self.df = self.df.drop([column_name], axis=1)
 
         self.dfs = [self.df]
+
+class maxAssetValue(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        for i in range(self.df_len):
+            print(i)
+            arr = []
+            for column in ASSET_COLUMNS:
+                if can_convert_to_int(self.df.loc[i][column]):
+                    arr.append(self.df.loc[i][column])
+
+            self.df.at[i, "MAX_ASSET_VALUE"] = max(arr)
+
+        for column in ASSET_COLUMNS:
+            self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]

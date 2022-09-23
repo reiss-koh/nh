@@ -33,3 +33,10 @@ DATA_PATH4 = ("cus_account_R5",
               "kr_equity_R5",
               "os_equity_R5",
               "cus_info_R3")
+
+ASSET_COLUMNS = ("tot_aet_tld_rnd_202201",
+                 "tot_aet_tld_rnd_202202",
+                 "tot_aet_tld_rnd_202203",
+                 "tot_aet_tld_rnd_202204",
+                 "tot_aet_tld_rnd_202205",
+                 "tot_aet_tld_rnd_202206")

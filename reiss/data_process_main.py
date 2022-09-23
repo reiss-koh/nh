@@ -119,6 +119,14 @@ from data_process_class import *
 # process23.process()
 # process23.export(["cus_info_R20.csv"], excel_or_csv="csv")
 
-process24 = dropColumn(data_path="cus_assets_R6.csv", excel_or_csv="csv")
-process24.process(column_name="mts_mm_access_type")
-process24.export(["cus_assets_R7.csv"], excel_or_csv="csv")
+# process24 = dropColumn(data_path="cus_assets_R6.csv", excel_or_csv="csv")
+# process24.process(column_name="mts_mm_access_type")
+# process24.export(["cus_assets_R7.csv"], excel_or_csv="csv")
+
+# process25 = dropColumn(data_path="cus_account_R6.csv", excel_or_csv="csv")
+# process25.process(column_name="itg_pdt_tp_cd")
+# process25.export(["cus_account_R7.csv"], excel_or_csv="csv")
+
+process26 = maxAssetValue(data_path="cus_assets_R7.csv", excel_or_csv="csv")
+process26.process()
+process26.export(["cus_assets_R8.csv"], excel_or_csv="csv")
