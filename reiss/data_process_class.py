@@ -4,6 +4,7 @@ import numpy as np
 from numpy import nan
 from scipy import stats
 from data_process_global import *
+from datetime import date, datetime
 
 pd.set_option("display.max_columns", None)
 
@@ -643,5 +644,23 @@ class maxAssetValue(DataProcess):
 
         for column in ASSET_COLUMNS:
             self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]
+
+class accLifespan(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        today = date.today()
+
+        for i in range(self.df_len):
+            year = int(str(self.df.loc[i]["fst_act_opn_dt"])[0:4])
+            month = int(str(self.df.loc[i]["fst_act_opn_dt"])[4:6])
+            day = int(str(self.df.loc[i]["fst_act_opn_dt"])[6:8])
+
+            dateObject = date(year, month, day)
+
+            self.df.at[i, "fst_act_opn_dt"] = (today - dateObject).days
 
         self.dfs = [self.df]

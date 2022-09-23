@@ -127,6 +127,14 @@ from data_process_class import *
 # process25.process(column_name="itg_pdt_tp_cd")
 # process25.export(["cus_account_R7.csv"], excel_or_csv="csv")
 
-process26 = maxAssetValue(data_path="cus_assets_R7.csv", excel_or_csv="csv")
-process26.process()
-process26.export(["cus_assets_R8.csv"], excel_or_csv="csv")
+# process26 = maxAssetValue(data_path="cus_assets_R7.csv", excel_or_csv="csv")
+# process26.process()
+# process26.export(["cus_assets_R8.csv"], excel_or_csv="csv")
+
+# process27 = dropColumn(data_path="cus_info_R20.csv", excel_or_csv="csv")
+# process27.process(column_name="cus_aet_stn_cd")
+# process27.export(["cus_info_R21.csv"], excel_or_csv="csv")
+
+process28 = accLifespan(data_path="cus_info_R21.csv", excel_or_csv="csv")
+process28.process()
+process28.export(["cus_info_R22.csv"], excel_or_csv="csv")
