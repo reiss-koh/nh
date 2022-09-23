@@ -135,6 +135,10 @@ from data_process_class import *
 # process27.process(column_name="cus_aet_stn_cd")
 # process27.export(["cus_info_R21.csv"], excel_or_csv="csv")
 
-process28 = accLifespan(data_path="cus_info_R21.csv", excel_or_csv="csv")
-process28.process()
-process28.export(["cus_info_R22.csv"], excel_or_csv="csv")
+# process28 = accLifespan(data_path="cus_info_R21.csv", excel_or_csv="csv")
+# process28.process()
+# process28.export(["cus_info_R22.csv"], excel_or_csv="csv")
+
+process29 = dropUnnamed(data_path="cus_info_R22.csv", excel_or_csv="csv")
+process29.process()
+process29.export(["cus_info_R23.csv"], excel_or_csv="csv")
