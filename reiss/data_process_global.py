@@ -1,4 +1,7 @@
 
+def most_frequent(list):
+    return max(set(list), key = list.count)
+
 def can_convert_to_int(string):
     try:
         int(string)

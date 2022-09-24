@@ -671,27 +671,79 @@ class infoToCrossSectMode(DataProcess):
 
     def process(self):
 
-        current_acc = ""
         self.df1 = pd.DataFrame()
 
-        k = 0
+        for column_name in MODE_COLUMNS:
+            current_acc = ""
+            k = 0
+            memory = []
 
-        for i in range(50):
-            print(i)
-            current_acc = self.df.loc[i]["act_no"]
-            mode_memory = []
-            max_memory = []
+            for i in range(self.df_len):
+                print(column_name, i)
 
-            for column_name in MODE_COLUMNS:
-                if self.df.loc[i]["act_no"] == current_acc:
-                    mode_memory.append(self.df.loc[i][column_name])
+                if current_acc == "":
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] == current_acc:
+                    memory.append(self.df.loc[i][column_name])
                 elif self.df.loc[i]["act_no"] != current_acc:
 
                     self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = most_frequent(memory)
 
-
-                    mode_memory = []
                     current_acc = self.df.loc[i]["act_no"]
+                    memory = [self.df.loc[i][column_name]]
+
                     k += 1
 
+                if i == self.df_len - 1:
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = most_frequent(memory)
+
         self.dfs = [self.df1]
+
+class infoToCrossSectMax(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df1 = pd.DataFrame()
+
+        for column_name in MAX_COLUMNS:
+            current_acc = ""
+            k = 0
+            memory = []
+
+            for i in range(self.df_len):
+                print(column_name, i)
+
+                if current_acc == "":
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] == current_acc:
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] != current_acc:
+
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = max(memory)
+
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory = [self.df.loc[i][column_name]]
+
+                    k += 1
+
+                if i == self.df_len - 1:
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = most_frequent(memory)
+
+        self.dfs = [self.df1]
+
+class concatDataframes(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.dfs = [self.df]

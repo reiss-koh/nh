@@ -143,9 +143,18 @@ from data_process_class import *
 # process29.process()
 # process29.export(["cus_info_R23.csv"], excel_or_csv="csv")
 
-process30 = infoToCrossSectMode(data_path="cus_info_R22.csv", excel_or_csv="csv")
-process30.process()
-process30.export(["cus_info_R23.csv"], excel_or_csv="csv")
+# process30 = infoToCrossSectMode(data_path="cus_info_R23.csv", excel_or_csv="csv")
+# process30.process()
+# process30.export(["cus_info_R23_mode.csv"], excel_or_csv="csv")
 
-# max
-# combine
+# process31 = infoToCrossSectMax(data_path="cus_info_R23.csv", excel_or_csv="csv")
+# process31.process()
+# process31.export(["cus_info_R23_max.csv"], excel_or_csv="csv")
+
+# process32 = concatDataframes(data_path="cus_info_R23_mode.csv", data_path1="cus_info_R23_max.csv", excel_or_csv="csv")
+# process32.process()
+# process32.export(["cus_info_R24.csv"], excel_or_csv="csv")
+
+process33 = dropUnnamed(data_path="cus_info_R24.csv", excel_or_csv="csv")
+process33.process()
+process33.export(["cus_info_R25.csv"], excel_or_csv="csv")
