@@ -747,3 +747,14 @@ class concatDataframes(DataProcess):
         self.df = pd.concat([self.df, self.df1], axis=1)
 
         self.dfs = [self.df]
+
+class removeWhiteSpace(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, column_name=""):
+        for i in range(self.df_len):
+
+            self.df.at[i, column_name] = str(self.df.loc[i][column_name]).strip()
+
+        self.dfs = [self.df]

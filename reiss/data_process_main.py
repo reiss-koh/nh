@@ -155,6 +155,14 @@ from data_process_class import *
 # process32.process()
 # process32.export(["cus_info_R24.csv"], excel_or_csv="csv")
 
-process33 = dropUnnamed(data_path="cus_info_R24.csv", excel_or_csv="csv")
-process33.process()
-process33.export(["cus_info_R25.csv"], excel_or_csv="csv")
+# process33 = dropUnnamed(data_path="cus_info_R24.csv", excel_or_csv="csv")
+# process33.process()
+# process33.export(["cus_info_R25.csv"], excel_or_csv="csv")
+
+# process34 = dropColumn(data_path="cus_account_R7.csv", excel_or_csv="csv")
+# process34.process(column_name="fc_sec_trd_nat_cd")
+# process34.export(["cus_account_R8.csv"], excel_or_csv="csv")
+
+process35 = removeWhiteSpace(data_path="cus_account_R8.csv", excel_or_csv="csv")
+process35.process(column_name="iem_cd")
+process35.export(["cus_account_R9.csv"], excel_or_csv="csv")
