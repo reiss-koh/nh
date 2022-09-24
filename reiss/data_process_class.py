@@ -5,6 +5,8 @@ from numpy import nan
 from scipy import stats
 from data_process_global import *
 from datetime import date, datetime
+import investpy
+from pandas_datareader import data as pdr
 
 pd.set_option("display.max_columns", None)
 
@@ -756,5 +758,23 @@ class removeWhiteSpace(DataProcess):
         for i in range(self.df_len):
 
             self.df.at[i, column_name] = str(self.df.loc[i][column_name]).strip()
+
+        self.dfs = [self.df]
+
+
+class getTicker(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            if isinstance(self.df.loc[i]["3m_vol"], int) or isinstance(self.df.loc[i]["3m_vol"], float):
+                continue
+            else:
+                df = investpy.stocks.search_stocks(by='isin', value=str(self.df.loc[i]["iem_cd"]))
+                print(df)
+                ticker = df.loc['symbol'].values[0]
+                print(ticker)
 
         self.dfs = [self.df]

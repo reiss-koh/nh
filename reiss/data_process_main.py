@@ -163,6 +163,10 @@ from data_process_class import *
 # process34.process(column_name="fc_sec_trd_nat_cd")
 # process34.export(["cus_account_R8.csv"], excel_or_csv="csv")
 
-process35 = removeWhiteSpace(data_path="cus_account_R8.csv", excel_or_csv="csv")
-process35.process(column_name="iem_cd")
-process35.export(["cus_account_R9.csv"], excel_or_csv="csv")
+# process35 = removeWhiteSpace(data_path="cus_account_R8.csv", excel_or_csv="csv")
+# process35.process(column_name="iem_cd")
+# process35.export(["cus_account_R9.csv"], excel_or_csv="csv")
+
+process36 = getTicker(data_path="cus_account_R9_1.xlsx")
+process36.process()
+process36.export(["cus_account_R10.csv"], excel_or_csv="csv")
