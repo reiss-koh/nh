@@ -1,7 +1,7 @@
-export_arr = []
-for i in range(1, 39):
-    export_arr.append("insu/energy/energy_" + str(i) + ".csv")
-
-process41 = toStockOCHLV(data_path="insu/energy_close_raw.xlsx", data_path1="insu/energy_high_raw.xlsx", data_path2="insu/energy_low_raw.xlsx", data_path3="insu/energy_open_raw.xlsx", data_path4="insu/energy_volume_raw.xlsx")
-process41.process()
-process41.export(export_arr, excel_or_csv="csv")
+for i in range(self.df_len):
+    if self.df.loc[i]["bas_stk_trd_tp_cd"] == 99 or self.df.loc[i]["bas_stk_trd_tp_cd"] == "_":
+        self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"
+    elif self.df.loc[i]["bas_stk_trd_tp_cd"] in dict:
+        self.df.at[i, "bas_stk_trd_tp_cd"] = dict[self.df.loc[i]["bas_stk_trd_tp_cd"]]
+    else:
+        self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"

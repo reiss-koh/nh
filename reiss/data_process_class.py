@@ -4,8 +4,9 @@ import numpy as np
 from numpy import nan
 from scipy import stats
 from data_process_global import *
-import ta
-from ta.utils import dropna
+from datetime import date, datetime
+
+pd.set_option("display.max_columns", None)
 
 
 class DataProcess(object):
@@ -13,34 +14,34 @@ class DataProcess(object):
                  data_path5="", data_path6="", data_path7="", data_path8="", data_path9=""):
 
         if excel_or_csv == "csv":
-            self.df = pd.read_csv(data_path, sep=',', encoding = 'unicode_escape')
+            self.df = pd.read_csv(data_path, sep=',', encoding='unicode_escape')
             self.df_list = [self.df]
             if data_path1 != "":
-                self.df1 = pd.read_csv(data_path1, sep=',', encoding = 'unicode_escape')
+                self.df1 = pd.read_csv(data_path1, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df1)
             if data_path2 != "":
-                self.df2 = pd.read_csv(data_path2, sep=',', encoding = 'unicode_escape')
+                self.df2 = pd.read_csv(data_path2, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df2)
             if data_path3 != "":
-                self.df3 = pd.read_csv(data_path3, sep=',', encoding = 'unicode_escape')
+                self.df3 = pd.read_csv(data_path3, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df3)
             if data_path4 != "":
-                self.df4 = pd.read_csv(data_path4, sep=',', encoding = 'unicode_escape')
+                self.df4 = pd.read_csv(data_path4, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df4)
             if data_path5 != "":
-                self.df5 = pd.read_csv(data_path5, sep=',', encoding = 'unicode_escape')
+                self.df5 = pd.read_csv(data_path5, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df5)
             if data_path6 != "":
-                self.df6 = pd.read_csv(data_path6, sep=',', encoding = 'unicode_escape')
+                self.df6 = pd.read_csv(data_path6, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df6)
             if data_path7 != "":
-                self.df7 = pd.read_csv(data_path7, sep=',', encoding = 'unicode_escape')
+                self.df7 = pd.read_csv(data_path7, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df7)
             if data_path8 != "":
-                self.df8 = pd.read_csv(data_path8, sep=',', encoding = 'unicode_escape')
+                self.df8 = pd.read_csv(data_path8, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df8)
             if data_path9 != "":
-                self.df9 = pd.read_csv(data_path9, sep=',', encoding = 'unicode_escape')
+                self.df9 = pd.read_csv(data_path9, sep=',', encoding='unicode_escape')
                 self.df_list.append(self.df9)
         else:
             self.df = pd.read_excel(data_path)
@@ -96,568 +97,6 @@ class DataProcess(object):
             print("Data Frames: ", len(self.dfs))
 
 
-class DropExchangeClose(DataProcess):
-    def __init__(self, data_path, data_path1, data_path2, data_path3):
-        super().__init__(data_path=data_path, data_path1=data_path1, data_path2=data_path2,
-                         data_path3=data_path3)
-
-    def process(self):
-        for i in range(len(self.df)):
-            if self.df.loc[i, "SPY_CLOSE"] == self.df.loc[i, "SH_CLOSE"] == self.df.loc[i, "IYR_CLOSE"] == self.df.loc[
-                i, "GLD_CLOSE"] == 0:
-                self.df.drop(index=i, inplace=True)
-                self.df1.drop(index=i, inplace=True)
-                self.df2.drop(index=i, inplace=True)
-                self.df3.drop(index=i, inplace=True)
-
-        self.df.reset_index(inplace=True)
-        self.df1.reset_index(inplace=True)
-        self.df2.reset_index(inplace=True)
-        self.df3.reset_index(inplace=True)
-
-        self.dfs = [self.df, self.df1, self.df2, self.df3]
-
-
-class DropExchangeCloseVIX(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self):
-        for i in range(len(self.df)):
-            if self.df.loc[i, "VIX_CLOSE"] == 0:
-                self.df.drop(index=i, inplace=True)
-
-        self.df.reset_index(inplace=True)
-
-        self.dfs = [self.df]
-
-
-class DropNoData(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self):
-        for column in self.df:
-            if self.df.loc[0][column] == 0:
-                self.df.drop(column, inplace=True, axis=1)
-
-        self.dfs = [self.df]
-
-
-class DropOpenClose(DataProcess):
-    def __init__(self, data_path, data_path1):
-        super().__init__(data_path=data_path, data_path1=data_path1)
-
-    def process(self, ETFS=("")):
-        for i in ETFS:
-            self.df.drop(i + "_OPEN", inplace=True, axis=1)
-            self.df.drop(i + "_CLOSE", inplace=True, axis=1)
-            self.df1.drop(i + "_OPEN", inplace=True, axis=1)
-            self.df1.drop(i + "_CLOSE", inplace=True, axis=1)
-
-        self.dfs = [self.df, self.df1]
-
-
-class DropNA(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, na="na"):
-        for i in range(len(self.df)):
-            if self.df.loc[i]["Bull-Bear Spread"] == na:
-                self.df.drop(index=i, inplace=True)
-
-        self.df.reset_index(inplace=True)
-
-        self.dfs = [self.df]
-
-
-class MACD(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, EMA_short_rw=12, EMA_long_rw=26, input="SPY"):
-        self.df = self.df[["Date", input + "_CLOSE"]]
-        self.df["EMA" + str(EMA_short_rw)] = ["_"] * len(self.df)
-        self.df["EMA" + str(EMA_long_rw)] = ["_"] * len(self.df)
-        self.df["MACD"] = ["_"] * len(self.df)
-
-        EMA_func(df=self.df, rolling_window=EMA_short_rw, init_index=EMA_short_rw - 1, input=input + "_CLOSE",
-                 output="EMA" + str(EMA_short_rw))
-        EMA_func(df=self.df, rolling_window=EMA_long_rw, init_index=EMA_long_rw - 1, input=input + "_CLOSE",
-                 output="EMA" + str(EMA_long_rw))
-        MACD_func(df=self.df, EMA_short="EMA" + str(EMA_short_rw), EMA_long="EMA" + str(EMA_long_rw), output="MACD")
-
-        self.dfs = [self.df]
-
-
-class ADX(DataProcess):
-    def __init__(self, data_path, data_path1):
-        super().__init__(data_path=data_path, data_path1=data_path1)
-
-    def process(self, input="SPY", rw=14):
-        self.df = self.df[["Date", input + "_CLOSE"]]
-        self.df[input + "_HIGH"] = self.df1[input + "_HIGH"]
-        self.df[input + "_LOW"] = self.df1[input + "_LOW"]
-
-        self.df["High_t Less Low_t"] = ["_"] * len(self.df)
-        self.df["High_t Less Close_t-1"] = ["_"] * len(self.df)
-        self.df["Low_t Less Close_t-1"] = ["_"] * len(self.df)
-        self.df["True Range"] = ["_"] * len(self.df)
-        self.df["Positive DM"] = ["_"] * len(self.df)  # DM: Directional Movement
-        self.df["Negative DM"] = ["_"] * len(self.df)
-        self.df["Smoothed True Range"] = ["_"] * len(self.df)
-        self.df["Smoothed Positive DM"] = ["_"] * len(self.df)
-        self.df["Smoothed Negative DM"] = ["_"] * len(self.df)
-        self.df["Positive Directional Indicator"] = ["_"] * len(self.df)
-        self.df["Negative Directional Indicator"] = ["_"] * len(self.df)
-        self.df["DX"] = ["_"] * len(self.df)
-        self.df["ADX"] = ["_"] * len(self.df)
-
-        for i in range(1, len(self.df)):
-            self.df.at[i, "High_t Less Low_t"] = self.df.loc[i][input + "_HIGH"] - self.df.loc[i][input + "_LOW"]
-            self.df.at[i, "High_t Less Close_t-1"] = abs(
-                self.df.loc[i][input + "_HIGH"] - self.df.loc[i - 1][input + "_CLOSE"])
-            self.df.at[i, "Low_t Less Close_t-1"] = abs(
-                self.df.loc[i][input + "_LOW"] - self.df.loc[i - 1][input + "_CLOSE"])
-            self.df.at[i, "True Range"] = max(self.df.loc[i]["High_t Less Low_t"],
-                                              self.df.loc[i]["High_t Less Close_t-1"],
-                                              self.df.loc[i]["Low_t Less Close_t-1"])
-
-            # derive Positive DM
-            if (self.df.loc[i][input + "_HIGH"] - self.df.loc[i - 1][input + "_HIGH"]) > (
-                    self.df.loc[i - 1][input + "_LOW"] - self.df.loc[i][input + "_LOW"]):
-                self.df.at[i, "Positive DM"] = self.df.loc[i][input + "_HIGH"] - self.df.loc[i - 1][input + "_HIGH"]
-            else:
-                self.df.at[i, "Positive DM"] = 0
-
-            # derive Negative DM
-            if (self.df.loc[i - 1][input + "_LOW"] - self.df.loc[i][input + "_LOW"]) > (
-                    self.df.loc[i][input + "_HIGH"] - self.df.loc[i - 1][input + "_HIGH"]):
-                self.df.at[i, "Negative DM"] = self.df.loc[i - 1][input + "_LOW"] - self.df.loc[i][input + "_LOW"]
-            else:
-                self.df.at[i, "Negative DM"] = 0
-
-        # initiate smooth
-        sum_POSITIVE = 0
-        sum_NEGATIVE = 0
-        sum_TRUE_RANGE = 0
-        for i in range(1, rw + 1):
-            sum_POSITIVE += self.df.loc[i]["Positive DM"]
-            sum_NEGATIVE += self.df.loc[i]["Negative DM"]
-            sum_TRUE_RANGE += self.df.loc[i]["True Range"]
-        self.df.at[rw, "Smoothed Positive DM"] = sum_POSITIVE
-        self.df.at[rw, "Smoothed Negative DM"] = sum_NEGATIVE
-        self.df.at[rw, "Smoothed True Range"] = sum_TRUE_RANGE
-
-        # derive smooth
-        for i in range(rw + 1, len(self.df)):
-            self.df.at[i, "Smoothed Positive DM"] = self.df.loc[i - 1]["Smoothed Positive DM"] - (
-                    self.df.loc[i - 1]["Smoothed Positive DM"] / rw) + self.df.loc[i]["Positive DM"]
-            self.df.at[i, "Smoothed Negative DM"] = self.df.loc[i - 1]["Smoothed Negative DM"] - (
-                    self.df.loc[i - 1]["Smoothed Negative DM"] / rw) + self.df.loc[i]["Negative DM"]
-            self.df.at[i, "Smoothed True Range"] = self.df.loc[i - 1]["Smoothed True Range"] - (
-                    self.df.loc[i - 1]["Smoothed True Range"] / rw) + self.df.loc[i]["True Range"]
-
-        # derive directional indicator, DX
-        for i in range(rw, len(self.df)):
-            # indicator as a percentage
-            self.df.at[i, "Positive Directional Indicator"] = (self.df.loc[i]["Smoothed Positive DM"] / self.df.loc[i][
-                "Smoothed True Range"]) * 100
-            self.df.at[i, "Negative Directional Indicator"] = (self.df.loc[i]["Smoothed Negative DM"] / self.df.loc[i][
-                "Smoothed True Range"]) * 100
-
-            self.df.at[i, "DX"] = abs((self.df.loc[i]["Positive Directional Indicator"] - self.df.loc[i][
-                "Negative Directional Indicator"]) / abs(
-                self.df.loc[i]["Positive Directional Indicator"] + self.df.loc[i][
-                    "Negative Directional Indicator"])) * 100
-
-        # initiate ADX
-        sum_DX = 0
-        for i in range(rw, rw * 2):
-            sum_DX += self.df.loc[i]["DX"]
-        avg_DX = sum_DX / rw
-        self.df.at[(rw * 2) - 1, "ADX"] = avg_DX
-
-        # derive ADX
-        for i in range(rw * 2, len(self.df)):
-            self.df.at[i, "ADX"] = ((self.df.loc[i - 1]["ADX"] * (rw - 1)) + self.df.loc[i]["DX"]) / rw
-
-        self.dfs = [self.df]
-
-
-class OBV(DataProcess):
-    def __init__(self, data_path, data_path1):
-        super().__init__(data_path=data_path, data_path1=data_path1)
-
-    def process(self, input="SPY"):
-        self.df = self.df[["Date", input + "_CLOSE"]]
-        self.df[input + "_VOLUME"] = self.df1[input + "_VOLUME"] * 1000000
-        self.df["OBV"] = ["_"] * len(self.df)
-
-        self.df.at[0, "OBV"] = self.df.loc[0][input + "_VOLUME"]
-
-        for i in range(1, len(self.df)):
-            if self.df.loc[i][input + "_CLOSE"] > self.df.loc[i - 1][input + "_CLOSE"]:
-                self.df.at[i, "OBV"] = self.df.loc[i - 1]["OBV"] + self.df.loc[i][input + "_VOLUME"]
-            elif self.df.loc[i][input + "_CLOSE"] < self.df.loc[i - 1][input + "_CLOSE"]:
-                self.df.at[i, "OBV"] = self.df.loc[i - 1]["OBV"] - self.df.loc[i][input + "_VOLUME"]
-            else:
-                self.df.at[i, "OBV"] = self.df.loc[i - 1]["OBV"]
-
-        self.dfs = [self.df]
-
-
-class BB(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, rw=20, stddev=2, input="SPY"):
-        self.df = self.df[["Date", input + "_CLOSE"]]
-        self.df[str(rw) + "D_SMA"] = ["_"] * len(self.df)
-        self.df[str(rw) + "D_STDDEV"] = ["_"] * len(self.df)
-        self.df["UPPER_BAND"] = ["_"] * len(self.df)
-        self.df["LOWER_BAND"] = ["_"] * len(self.df)
-
-        for i in range(rw - 1, len(self.df)):
-            arr = []
-            for j in range(i - (rw - 1), i + 1):
-                arr.append(self.df.loc[j][input + "_CLOSE"])
-            self.df.at[i, str(rw) + "D_SMA"] = np.mean(arr)
-            self.df.at[i, str(rw) + "D_STDDEV"] = np.std(arr, ddof=1)
-            self.df.at[i, "UPPER_BAND"] = self.df.loc[i][str(rw) + "D_SMA"] + (
-                    stddev * self.df.loc[i][str(rw) + "D_STDDEV"])
-            self.df.at[i, "LOWER_BAND"] = self.df.loc[i][str(rw) + "D_SMA"] - (
-                    stddev * self.df.loc[i][str(rw) + "D_STDDEV"])
-
-        self.dfs = [self.df]
-
-
-class MacroQoQ(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self):
-        self.df["OECD_LI_US_DEL"] = ["_"] * len(self.df)
-        self.df["CB_LI_US_DEL"] = ["_"] * len(self.df)
-        self.df["M2_US_DEL"] = ["_"] * len(self.df)
-        self.df["CPI_US_DEL"] = ["_"] * len(self.df)
-        self.df["NEW_DATA"] = ["_"] * len(self.df)
-        self.df["OECD_LI_US_QoQ"] = ["_"] * len(self.df)
-        self.df["CB_LI_US_QoQ"] = ["_"] * len(self.df)
-        self.df["M2_US_QoQ"] = ["_"] * len(self.df)
-        self.df["CPI_US_QoQ"] = ["_"] * len(self.df)
-
-        # identify date of new data
-        for i in range(1, len(self.df)):
-            if self.df.loc[i]["OECD_LI_US"] != self.df.loc[i - 1]["OECD_LI_US"]:
-                self.df.at[i, "OECD_LI_US_DEL"] = 1
-            else:
-                self.df.at[i, "OECD_LI_US_DEL"] = 0
-
-            if self.df.loc[i]["CB_LI_US"] != self.df.loc[i - 1]["CB_LI_US"]:
-                self.df.at[i, "CB_LI_US_DEL"] = 1
-            else:
-                self.df.at[i, "CB_LI_US_DEL"] = 0
-
-            if self.df.loc[i]["M2_US"] != self.df.loc[i - 1]["M2_US"]:
-                self.df.at[i, "M2_US_DEL"] = 1
-            else:
-                self.df.at[i, "M2_US_DEL"] = 0
-
-            if self.df.loc[i]["CPI_US"] != self.df.loc[i - 1]["CPI_US"]:
-                self.df.at[i, "CPI_US_DEL"] = 1
-            else:
-                self.df.at[i, "CPI_US_DEL"] = 0
-
-            if self.df.loc[i]["OECD_LI_US_DEL"] == self.df.loc[i]["CB_LI_US_DEL"] == self.df.loc[i]["M2_US_DEL"] == \
-                    self.df.loc[i]["CPI_US_DEL"] == 0:
-                self.df.at[i, "NEW_DATA"] = 0
-            else:
-                self.df.at[i, "NEW_DATA"] = 1
-
-        # initialize %QoQ
-        self.df.at[9, "OECD_LI_US_QoQ"] = pctDel(self.df.loc[9]["OECD_LI_US"],
-                                                 self.df.loc[9 - 5]["OECD_LI_US"])  # 5 chosen arbitrarily
-        self.df.at[9, "CB_LI_US_QoQ"] = pctDel(self.df.loc[9]["CB_LI_US"], self.df.loc[9 - 5]["CB_LI_US"])
-        self.df.at[9, "M2_US_QoQ"] = pctDel(self.df.loc[9]["M2_US"], self.df.loc[9 - 5]["M2_US"])
-        self.df.at[9, "CPI_US_QoQ"] = pctDel(self.df.loc[9]["CPI_US"], self.df.loc[9 - 5]["CPI_US"])
-
-        # derive %QoQ
-        for i in range(10, len(self.df)):
-            if self.df.loc[i]["NEW_DATA"] == 1:
-                self.df.at[i, "OECD_LI_US_QoQ"] = pctDel(self.df.loc[i]["OECD_LI_US"], self.df.loc[i - 5]["OECD_LI_US"])
-                self.df.at[i, "CB_LI_US_QoQ"] = pctDel(self.df.loc[i]["CB_LI_US"], self.df.loc[i - 5]["CB_LI_US"])
-                self.df.at[i, "M2_US_QoQ"] = pctDel(self.df.loc[i]["M2_US"], self.df.loc[i - 5]["M2_US"])
-                self.df.at[i, "CPI_US_QoQ"] = pctDel(self.df.loc[i]["CPI_US"], self.df.loc[i - 5]["CPI_US"])
-            else:
-                self.df.at[i, "OECD_LI_US_QoQ"] = self.df.at[i - 1, "OECD_LI_US_QoQ"]
-                self.df.at[i, "CB_LI_US_QoQ"] = self.df.at[i - 1, "CB_LI_US_QoQ"]
-                self.df.at[i, "M2_US_QoQ"] = self.df.at[i - 1, "M2_US_QoQ"]
-                self.df.at[i, "CPI_US_QoQ"] = self.df.at[i - 1, "CPI_US_QoQ"]
-
-        self.dfs = [self.df]
-
-
-class YieldCurve(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, rw=5):
-        self.df["10Y-2Y_EMA" + str(rw)] = ["_"] * len(self.df)
-        self.df["10Y-3M_EMA" + str(rw)] = ["_"] * len(self.df)
-        self.df["10Y-2Y_DEL"] = ["_"] * len(self.df)
-        self.df["10Y-3M_DEL"] = ["_"] * len(self.df)
-
-        EMA_func(df=self.df, rolling_window=rw, init_index=rw - 1, input="10Y-2Y", output="10Y-2Y_EMA" + str(rw))
-        EMA_func(df=self.df, rolling_window=rw, init_index=rw - 1, input="10Y-3M", output="10Y-3M_EMA" + str(rw))
-
-        # derive delta (bps)
-        for i in range(1, len(self.df)):
-            self.df.at[i, "10Y-2Y_DEL"] = 100 * (self.df.loc[i]["10Y-2Y"] - self.df.loc[i - 1]["10Y-2Y"])
-            self.df.at[i, "10Y-3M_DEL"] = 100 * (self.df.loc[i]["10Y-3M"] - self.df.loc[i - 1]["10Y-3M"])
-
-        self.dfs = [self.df]
-
-
-class ProcessVIX(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, ema_rw=5, stddev_rw=5):
-        self.df["VIX_EMA" + str(ema_rw)] = ["_"] * len(self.df)
-        self.df["VIX_DEL"] = ["_"] * len(self.df)
-        self.df["VIX_DEL_STDDEV"] = ["_"] * len(self.df)
-
-        EMA_func(df=self.df, rolling_window=ema_rw, init_index=ema_rw - 1, input="VIX_CLOSE",
-                 output="VIX_EMA" + str(ema_rw))
-
-        # derive delta (bps)
-        for i in range(1, len(self.df)):
-            self.df.at[i, "VIX_DEL"] = 100 * (self.df.loc[i]["VIX_CLOSE"] - self.df.loc[i - 1]["VIX_CLOSE"])
-
-        # derive delta's (bps) volatility
-        for i in range(stddev_rw, len(self.df)):
-            arr = []
-            for i in range(i - (stddev_rw - 1), i + 1):
-                arr.append(self.df.loc[i]["VIX_DEL"])
-            self.df.at[i, "VIX_DEL_STDDEV"] = np.std(arr, ddof=1)
-
-        self.dfs = [self.df]
-
-
-class IndexUSD(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self):
-        self.df["USDEUR_50"] = ["_"] * len(self.df)
-        self.df["USDJPY_50"] = ["_"] * len(self.df)
-        self.df["USD_INDEX"] = ["_"] * len(self.df)  # equal weight usd eur/jpy basket
-        # interpreted as usd bull index
-
-        # transform
-        factor_USDEUR = 50 / self.df.loc[0]["USDEUR_MID"]
-        factor_USDJPY = 50 / self.df.loc[0]["USDJPY_MID"]
-        self.df.at[0, "USDEUR_50"] = 50
-        self.df.at[0, "USDJPY_50"] = 50
-        self.df.at[0, "USD_INDEX"] = 100
-
-        for i in range(1, len(self.df)):
-            self.df.at[i, "USDEUR_50"] = self.df.loc[i]["USDEUR_MID"] * factor_USDEUR
-            self.df.at[i, "USDJPY_50"] = self.df.loc[i]["USDJPY_MID"] * factor_USDJPY
-            self.df.at[i, "USD_INDEX"] = self.df.loc[i]["USDEUR_50"] + self.df.loc[i]["USDJPY_50"]
-
-        self.dfs = [self.df]
-
-
-class ProcessUSD(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, rw=5):
-        self.df["USD_EMA" + str(rw)] = ["_"] * len(self.df)
-        self.df["USD_PCTDEL"] = ["_"] * len(self.df)
-
-        EMA_func(df=self.df, rolling_window=rw, init_index=rw - 1, input="USD_INDEX", output="USD_EMA5")
-
-        # derive percent change
-        for i in range(rw, len(self.df)):
-            self.df.at[i, "USD_PCTDEL"] = pctDel(self.df.loc[i]["USD_INDEX"], self.df.loc[i - 1]["USD_INDEX"])
-
-        self.dfs = [self.df]
-
-
-class ProcessCDS1(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self):
-        for i in range(1, 39):
-            self.df["CDX" + str(i) + "_DEL"] = ["_"] * len(self.df)
-
-            # del: bps change in spread
-
-            for j in range(1, len(self.df)):
-                if self.df.loc[j]["CDX" + str(i)] != 0 and self.df.loc[j - 1]["CDX" + str(i)] != 0:
-                    self.df.at[j, "CDX" + str(i) + "_DEL"] = self.df.loc[j]["CDX" + str(i)] - self.df.loc[j - 1][
-                        "CDX" + str(i)]
-
-        self.dfs = [self.df]
-
-
-class ProcessCDS2(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self):
-        # TODO need to check if this is correct, it seems to be deleting a lot of rows
-        for i in range(0, len(self.df)):
-            drop = True
-            for j in range(1, 39):
-                if self.df.loc[i]["CDX" + str(j) + "_DEL"] == "_" or self.df.loc[i]["CDX" + str(j) + "_DEL"] == 0:
-                    continue
-                else:
-                    drop = False
-                    break
-
-            if drop:
-                self.df.drop(index=i, inplace=True)
-
-        self.df.reset_index(inplace=True)
-
-        self.dfs = [self.df]
-
-
-class Week52(DataProcess):
-    def __init__(self, data_path, data_path1):
-        super().__init__(data_path=data_path, data_path1=data_path1)
-
-    def process(self, ETFS=("")):
-        for i in range(len(ETFS)):
-            self.df[ETFS[i] + "_%_to_52wH"] = ["_"] * len(self.df)
-            self.df[ETFS[i] + "_%_from_52wL"] = ["_"] * len(self.df)
-
-            for j in range(1, len(self.df)):
-                if self.df.loc[j][ETFS[i] + "_52wH"] != 0 and self.df1.loc[j][ETFS[i] + "_CLOSE"] != 0 and \
-                        self.df.loc[j][ETFS[i] + "_52wL"] != 0:
-                    self.df.at[j, ETFS[i] + "_%_to_52wH"] = pctDel(self.df.loc[j][ETFS[i] + "_52wH"],
-                                                                   self.df1.loc[j][ETFS[i] + "_CLOSE"])
-                    self.df.at[j, ETFS[i] + "_%_from_52wL"] = pctDel(self.df1.loc[j][ETFS[i] + "_CLOSE"],
-                                                                     self.df.loc[j][ETFS[i] + "_52wL"])
-
-            self.dfs = [self.df]
-
-
-class MomentsFirstSecond(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, ETFS=(""), rw=21):
-        for i in range(len(ETFS)):
-            self.df[ETFS[i] + "_MEAN"] = ["_"] * len(self.df)
-            self.df[ETFS[i] + "_STDDEV"] = ["_"] * len(self.df)
-
-            for j in range(rw, len(self.df)):
-                print(i, j)
-                arr = []
-                for k in range(j - (rw - 1), j + 1):
-                    if self.df.loc[k][ETFS[i] + "_LNRETURN"] == "_" or self.df.loc[k][ETFS[i] + "_LNRETURN"] == 0:
-                        continue
-                    else:
-                        arr.append(self.df.loc[k][ETFS[i] + "_LNRETURN"])
-                self.df.at[j, ETFS[i] + "_MEAN"] = np.mean(arr)
-                self.df.at[j, ETFS[i] + "_STDDEV"] = np.std(arr, ddof=1)
-
-        self.dfs = [self.df]
-
-
-class MomentsThirdFourth(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, ETFS=(""), rw=21):
-        for i in range(len(ETFS)):
-            self.df[ETFS[i] + "_SKEW"] = ["_"] * len(self.df)
-            self.df[ETFS[i] + "_KURTOSIS"] = ["_"] * len(self.df)
-
-            break_outer_loop = False
-            for j in range(rw, len(self.df)):
-                print(i, j)
-                arr = []
-                for k in range(j - (rw - 1), j + 1):
-                    if self.df.loc[k][ETFS[i] + "_LNRETURN"] == "_" or self.df.loc[k][ETFS[i] + "_LNRETURN"] == 0:
-                        continue
-                    else:
-                        arr.append(self.df.loc[k][ETFS[i] + "_LNRETURN"])
-                self.df.at[j, ETFS[i] + "_SKEW"] = stats.skew(arr)
-                self.df.at[j, ETFS[i] + "_KURTOSIS"] = stats.kurtosis(arr)
-
-        self.dfs = [self.df]
-
-
-class DelStdDevCDS(DataProcess):
-    def __init__(self, data_path, rw=10):
-        super().__init__(data_path=data_path)
-
-    def process(self, rw=10):
-        for i in range(1, 39):
-            self.df["CDX" + str(i) + "_DEL_STDDEV"] = ["_"] * len(self.df)
-
-            for j in range(10, len(self.df)):
-                print(i, j)
-                arr = []
-                for k in range(j - (rw - 1), j + 1):
-                    if self.df.loc[k]["CDX" + str(i) + "_DEL"] == "_" or self.df.loc[k]["CDX" + str(i) + "_DEL"] == 0:
-                        continue
-                    else:
-                        arr.append(self.df.loc[k]["CDX" + str(i) + "_DEL"])
-                self.df.at[j, "CDX" + str(i) + "_DEL_STDDEV"] = np.std(arr, ddof=1)
-
-        self.dfs = [self.df]
-
-
-class ProcessCDS3(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, last_index=85):
-        for i in range(last_index + 1):
-            self.df.drop(index=i, inplace=True)
-
-        self.df.reset_index(inplace=True)
-
-        self.dfs = [self.df]
-
-
-class ProcessCDS4(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, last_index=4):
-        for i in range(1, last_index - 1):
-            self.df.drop("CDX" + str(i) + "_DEL_STDDEV", inplace=True, axis=1)
-
-        self.dfs = [self.df]
-
-
-class ProcessCDS5(DataProcess):
-    def __init__(self, data_path):
-        super().__init__(data_path=data_path)
-
-    def process(self, first_index=5):
-        self.df["CDX_INDEX"] = ["_"] * len(self.df)
-
-        for i in range(len(self.df)):
-            arr = []
-            for j in range(first_index, 39):
-                if self.df.loc[i]["CDX" + str(j) + "_DEL_STDDEV"] > 0:
-                    arr.append(self.df.loc[i]["CDX" + str(j) + "_DEL_STDDEV"])
-
-            self.df.at[i, "CDX_INDEX"] = np.median(arr)
-
-        self.dfs = [self.df]
-
 class customerAccount(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
@@ -689,6 +128,7 @@ class customerAccount(DataProcess):
                 print("Not 1 Found")
 
         self.dfs = [self.df1]
+
 
 # previous code, very bad, ignore
 class chronological(DataProcess):
@@ -729,13 +169,13 @@ class chronological(DataProcess):
 
         self.dfs = [self.df1]
 
+
 # new code, efficient, good
 class chronological2(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self, sort_by="bse_ym"):
-        pd.set_option("display.max_rows", None, "display.max_columns", None)
         self.df_output = pd.DataFrame()
         current_acc = ""
         for i in range(self.df_len):
@@ -755,13 +195,14 @@ class chronological2(DataProcess):
                 current_acc = self.df.loc[i]["act_no"]
                 indicies = [i]
 
-            if i == self.df_len-1:
+            if i == self.df_len - 1:
                 self.df1 = pd.DataFrame()
                 self.df1 = self.df.iloc[indicies, :]
                 self.df1 = self.df1.sort_values(by=sort_by, ascending=True)
                 self.df_output = self.df_output.append(self.df1, ignore_index=True)
 
         self.dfs = [self.df_output]
+
 
 class yesNo(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
@@ -777,6 +218,7 @@ class yesNo(DataProcess):
                     self.df.at[i, column] = 0
 
         self.dfs = [self.df]
+
 
 class uniqueFX(DataProcess):
     def __init__(self, data_path, data_path1, excel_or_csv=""):
@@ -797,6 +239,7 @@ class uniqueFX(DataProcess):
             print(fx)
 
         self.dfs = [self.df]
+
 
 class renameCusAcc(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
@@ -835,24 +278,24 @@ class renameCusAcc(DataProcess):
 
         return acc_dict
 
+
 class renameCusAcc1(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self, acc_dict={}):
-
         for i in range(self.df_len):
             print(i)
             self.df.at[i, "act_no"] = acc_dict[self.df.loc[i, "act_no"]]
 
         self.dfs = [self.df]
 
+
 class renameCusAcc2(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
     def process(self, acc_dict={}):
-
         self.df.drop("cus_no", axis=1, inplace=True)
 
         for i in range(self.df_len):
@@ -860,6 +303,7 @@ class renameCusAcc2(DataProcess):
             self.df.at[i, "act_no"] = acc_dict[self.df.loc[i, "act_no"]]
 
         self.dfs = [self.df]
+
 
 class oneHotFX(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
@@ -873,16 +317,22 @@ class oneHotFX(DataProcess):
 
         self.dfs = [self.df]
 
+
 class accToNum(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
 
-    def process(self):
+    def process(self, drop=""):
+
+        if drop != "":
+            self.df = self.df.drop([drop], axis=1)
+
         for i in range(self.df_len):
             print(i)
             self.df.at[i, "act_no"] = int(self.df.loc[i]["act_no"][4:])
 
         self.dfs = [self.df]
+
 
 class sortByAcc(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
@@ -890,5 +340,421 @@ class sortByAcc(DataProcess):
 
     def process(self):
         self.df = self.df.sort_values(by="act_no", ascending=True, kind="mergesort")  # mergesort is stable
+
+        self.dfs = [self.df]
+
+
+class dropUnnamed(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        for column in self.df:
+            if "Unnamed" in column:
+                self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]
+
+
+class monthlyAccessCount(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            arr = list(str(self.df.loc[i]["mts_mm_access_type"]))
+
+            sum = 0
+            for j in arr:
+                sum += int(j)
+
+            self.df.at[i, "mts_mm_access_type"] = sum
+
+        self.dfs = [self.df]
+
+
+class oneHotSex(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        pd.set_option("display.max_columns", None)
+        for i in range(self.df_len):
+
+            if self.df.loc[i]["sex_dit_cd"] == 1:
+                self.df.at[i, "sex_dit_cd"] = "M"
+            elif self.df.loc[i]["sex_dit_cd"] == 2:
+                self.df.at[i, "sex_dit_cd"] = "F"
+            elif self.df.loc[i]["sex_dit_cd"] == 99:
+                self.df.at[i, "sex_dit_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.sex_dit_cd, prefix='SEX')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("sex_dit_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+
+class processAge(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["cus_age_stn_cd"] == 99:
+                self.df.at[i, "cus_age_stn_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+
+class regroupSecurity(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        low_risk = [1, 15, 14, 13, 12, 11, 10]
+        mid_risk = [9, 8, 7, 6]
+        high_risk = [5, 4, 3, 2]
+        na = [99]
+
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i]["mrz_pdt_tp_sgm_cd"] in low_risk:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 1
+            elif self.df.loc[i]["mrz_pdt_tp_sgm_cd"] in mid_risk:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 2
+            elif self.df.loc[i]["mrz_pdt_tp_sgm_cd"] in high_risk:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 3
+            elif self.df.loc[i]["mrz_pdt_tp_sgm_cd"] in na:
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+
+class lifestageProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["lsg_sgm_cd"] == 99:
+                self.df.at[i, "lsg_sgm_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.lsg_sgm_cd, prefix='LIFESTAGE')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("lsg_sgm_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+
+class customerLvlProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        dictionary = {1: 7,
+                      2: 6,
+                      3: 5,
+                      4: 4,
+                      5: 3,
+                      9: 2,
+                      99: 1}
+
+        for i in range(self.df_len):
+            self.df.at[i, "tco_cus_grd_cd"] = dictionary[self.df.loc[i]["tco_cus_grd_cd"]]
+
+        self.dfs = [self.df]
+
+
+class totalDurationInvestingProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["tot_ivs_te_sgm_cd"] == 99:
+                self.df.at[i, "tot_ivs_te_sgm_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+
+class holdingsTypeProcessing(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            if self.df.loc[i]["hld_pdt_tp_sgm_cd"] == 99:
+                self.df.at[i, "hld_pdt_tp_sgm_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.hld_pdt_tp_sgm_cd, prefix='HOLDINGS_TYPE')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("hld_pdt_tp_sgm_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+
+class loyaltyProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        dictionary = {1: 6,
+                      2: 5,
+                      3: 4,
+                      4: 3,
+                      5: 2,
+                      6: 1}
+
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i]["loy_sgm_cd"] == 99:
+                self.df.at[i, "loy_sgm_cd"] = "NA"
+            elif self.df.loc[i]["loy_sgm_cd"] in dictionary:
+                self.df.at[i, "loy_sgm_cd"] = dictionary[self.df.loc[i]["loy_sgm_cd"]]
+            else:
+                self.df.at[i, "loy_sgm_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+
+class mainMarketProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        low_soph = [6]
+        mid_soph = [1, 2, 4]
+        high_soph = [5]
+        vhigh_soph = [3]
+
+        for i in range(self.df_len):
+            if self.df.loc[i]["mrz_mkt_dit_cd"] == 99:
+                self.df.at[i, "mrz_mkt_dit_cd"] = "NA"
+            elif self.df.loc[i]["mrz_mkt_dit_cd"] in low_soph:
+                self.df.at[i, "mrz_mkt_dit_cd"] = 1
+            elif self.df.loc[i]["mrz_mkt_dit_cd"] in mid_soph:
+                self.df.at[i, "mrz_mkt_dit_cd"] = 2
+            elif self.df.loc[i]["mrz_mkt_dit_cd"] in high_soph:
+                self.df.at[i, "mrz_mkt_dit_cd"] = 3
+            elif self.df.loc[i]["mrz_mkt_dit_cd"] in vhigh_soph:
+                self.df.at[i, "mrz_mkt_dit_cd"] = 4
+
+        self.dfs = [self.df]
+
+
+class mainSectorProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        for i in range(self.df_len):
+            if self.df.loc[i]["mrz_btp_dit_cd"] == 99:
+                self.df.at[i, "mrz_btp_dit_cd"] = "NA"
+
+        self.df1 = pd.get_dummies(self.df.mrz_btp_dit_cd, prefix='SECTOR')
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.df.drop("mrz_btp_dit_cd", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+
+class netWorthProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        dictionary = {1: 5,
+                      2: 4,
+                      3: 3,
+                      4: 2,
+                      5: 1}
+
+        for i in range(self.df_len):
+            if self.df.loc[i]["aet_bse_stk_trd_tp_cd"] == 99 or self.df.loc[i]["aet_bse_stk_trd_tp_cd"] == "_":
+                self.df.at[i, "aet_bse_stk_trd_tp_cd"] = "NA"
+            elif self.df.loc[i]["aet_bse_stk_trd_tp_cd"] in dictionary:
+                self.df.at[i, "aet_bse_stk_trd_tp_cd"] = dictionary[self.df.loc[i]["aet_bse_stk_trd_tp_cd"]]
+            else:
+                self.df.at[i, "aet_bse_stk_trd_tp_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+
+class tradeFrequencyProcess(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        dictionary = {1: 11,
+                      2: 10,
+                      3: 9,
+                      4: 8,
+                      5: 7,
+                      6: 6,
+                      7: 5,
+                      8: 4,
+                      9: 3,
+                      10: 2,
+                      11: 1}
+
+        for i in range(self.df_len):
+            if self.df.loc[i]["bas_stk_trd_tp_cd"] == 99:
+                self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"
+            if can_convert_to_int(self.df.loc[i]["bas_stk_trd_tp_cd"]):
+                self.df.at[i, "bas_stk_trd_tp_cd"] = dictionary[int(self.df.loc[i]["bas_stk_trd_tp_cd"])]
+            else:
+                self.df.at[i, "bas_stk_trd_tp_cd"] = "NA"
+
+        self.dfs = [self.df]
+
+class dropColumn(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, column_name="Unnamed"):
+        self.df = self.df.drop([column_name], axis=1)
+
+        self.dfs = [self.df]
+
+class maxAssetValue(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        for i in range(self.df_len):
+            print(i)
+            arr = []
+            for column in ASSET_COLUMNS:
+                if can_convert_to_int(self.df.loc[i][column]):
+                    arr.append(self.df.loc[i][column])
+
+            self.df.at[i, "MAX_ASSET_VALUE"] = max(arr)
+
+        for column in ASSET_COLUMNS:
+            self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]
+
+class accLifespan(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        today = date.today()
+
+        for i in range(self.df_len):
+            year = int(str(self.df.loc[i]["fst_act_opn_dt"])[0:4])
+            month = int(str(self.df.loc[i]["fst_act_opn_dt"])[4:6])
+            day = int(str(self.df.loc[i]["fst_act_opn_dt"])[6:8])
+
+            dateObject = date(year, month, day)
+
+            self.df.at[i, "fst_act_opn_dt"] = (today - dateObject).days
+
+        self.dfs = [self.df]
+
+class infoToCrossSectMode(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df1 = pd.DataFrame()
+
+        for column_name in MODE_COLUMNS:
+            current_acc = ""
+            k = 0
+            memory = []
+
+            for i in range(self.df_len):
+                print(column_name, i)
+
+                if current_acc == "":
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] == current_acc:
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] != current_acc:
+
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = most_frequent(memory)
+
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory = [self.df.loc[i][column_name]]
+
+                    k += 1
+
+                if i == self.df_len - 1:
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = most_frequent(memory)
+
+        self.dfs = [self.df1]
+
+class infoToCrossSectMax(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df1 = pd.DataFrame()
+
+        for column_name in MAX_COLUMNS:
+            current_acc = ""
+            k = 0
+            memory = []
+
+            for i in range(self.df_len):
+                print(column_name, i)
+
+                if current_acc == "":
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] == current_acc:
+                    memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] != current_acc:
+
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = max(memory)
+
+                    current_acc = self.df.loc[i]["act_no"]
+                    memory = [self.df.loc[i][column_name]]
+
+                    k += 1
+
+                if i == self.df_len - 1:
+                    self.df1.at[k, "act_no"] = current_acc
+                    self.df1.at[k, column_name] = most_frequent(memory)
+
+        self.dfs = [self.df1]
+
+class concatDataframes(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.dfs = [self.df]
+
+class removeWhiteSpace(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, column_name=""):
+        for i in range(self.df_len):
+
+            self.df.at[i, column_name] = str(self.df.loc[i][column_name]).strip()
 
         self.dfs = [self.df]

@@ -55,8 +55,114 @@ from data_process_class import *
 #     process8.process()
 #     process8.export([file_name[:-3] + "_R4.csv"], excel_or_csv="csv")
 
-for file_name in DATA_PATH3:
-    process9 = sortByAcc(data_path=file_name + "_R4.csv", excel_or_csv="csv")
-    process9.process()  # merge sort is used for stability
-    process9.export([file_name + "_R5.csv"], excel_or_csv="csv")
+# for file_name in DATA_PATH3:
+#     process9 = sortByAcc(data_path=file_name + "_R4.csv", excel_or_csv="csv")
+#     process9.process()  # merge sort is used for stability
+#     process9.export([file_name + "_R5.csv"], excel_or_csv="csv")
 
+# Remove Unnecessary Index Columns
+# Make All Revision to R6 for Comparability
+# for file_name in DATA_PATH4:
+#     process10 = dropUnnamed(data_path=file_name + ".csv", excel_or_csv="csv")
+#     process10.process()
+#     process10.export([file_name[:-3] + "_R6.csv"], excel_or_csv="csv")
+
+# process11 = accToNum(data_path="cus_info_R6" + ".csv", excel_or_csv="csv")
+# process11.process(drop="cus_no")
+# process11.export(["cus_info_R7.csv"], excel_or_csv="csv")
+
+# process12 = monthlyAccessCount(data_path="cus_info_R7" + ".csv", excel_or_csv="csv")
+# process12.process()
+# process12.export(["cus_info_R8.csv"], excel_or_csv="csv")
+
+# process13 = oneHotSex(data_path="cus_info_R8" + ".csv", excel_or_csv="csv")
+# process13.process()
+# process13.export(["cus_info_R9.csv"], excel_or_csv="csv")
+
+# process14 = processAge(data_path="cus_info_R9" + ".csv", excel_or_csv="csv")
+# process14.process()
+# process14.export(["cus_info_R10.csv"], excel_or_csv="csv")
+
+# process15 = regroupSecurity(data_path="cus_info_R10" + ".csv", excel_or_csv="csv")
+# process15.process()
+# process15.export(["cus_info_R11.csv"], excel_or_csv="csv")
+#
+# process16 = lifestageProcess(data_path="cus_info_R11" + ".csv", excel_or_csv="csv")
+# process16.process()
+# process16.export(["cus_info_R12.csv"], excel_or_csv="csv")
+#
+# process17 = totalDurationInvestingProcess(data_path="cus_info_R13" + ".csv", excel_or_csv="csv")
+# process17.process()
+# process17.export(["cus_info_R14.csv"], excel_or_csv="csv")
+#
+# process18 = holdingsTypeProcessing(data_path="cus_info_R14" + ".csv", excel_or_csv="csv")
+# process18.process()
+# process18.export(["cus_info_R15.csv"], excel_or_csv="csv")
+#
+# process19 = loyaltyProcess(data_path="cus_info_R15" + ".csv", excel_or_csv="csv")
+# process19.process()
+# process19.export(["cus_info_R16.csv"], excel_or_csv="csv")
+
+# process20 = mainMarketProcess(data_path="cus_info_R16" + ".csv", excel_or_csv="csv")
+# process20.process()
+# process20.export(["cus_info_R17.csv"], excel_or_csv="csv")
+
+# process21 = mainSectorProcess(data_path="cus_info_R17" + ".csv", excel_or_csv="csv")
+# process21.process()
+# process21.export(["cus_info_R18.csv"], excel_or_csv="csv")
+
+# process22 = netWorthProcess(data_path="cus_info_R18" + ".csv", excel_or_csv="csv")
+# process22.process()
+# process22.export(["cus_info_R19.csv"], excel_or_csv="csv")
+
+# process23 = tradeFrequencyProcess(data_path="cus_info_R19" + ".csv", excel_or_csv="csv")
+# process23.process()
+# process23.export(["cus_info_R20.csv"], excel_or_csv="csv")
+
+# process24 = dropColumn(data_path="cus_assets_R6.csv", excel_or_csv="csv")
+# process24.process(column_name="mts_mm_access_type")
+# process24.export(["cus_assets_R7.csv"], excel_or_csv="csv")
+
+# process25 = dropColumn(data_path="cus_account_R6.csv", excel_or_csv="csv")
+# process25.process(column_name="itg_pdt_tp_cd")
+# process25.export(["cus_account_R7.csv"], excel_or_csv="csv")
+
+# process26 = maxAssetValue(data_path="cus_assets_R7.csv", excel_or_csv="csv")
+# process26.process()
+# process26.export(["cus_assets_R8.csv"], excel_or_csv="csv")
+
+# process27 = dropColumn(data_path="cus_info_R20.csv", excel_or_csv="csv")
+# process27.process(column_name="cus_aet_stn_cd")
+# process27.export(["cus_info_R21.csv"], excel_or_csv="csv")
+
+# process28 = accLifespan(data_path="cus_info_R21.csv", excel_or_csv="csv")
+# process28.process()
+# process28.export(["cus_info_R22.csv"], excel_or_csv="csv")
+
+# process29 = dropUnnamed(data_path="cus_info_R22.csv", excel_or_csv="csv")
+# process29.process()
+# process29.export(["cus_info_R23.csv"], excel_or_csv="csv")
+
+# process30 = infoToCrossSectMode(data_path="cus_info_R23.csv", excel_or_csv="csv")
+# process30.process()
+# process30.export(["cus_info_R23_mode.csv"], excel_or_csv="csv")
+
+# process31 = infoToCrossSectMax(data_path="cus_info_R23.csv", excel_or_csv="csv")
+# process31.process()
+# process31.export(["cus_info_R23_max.csv"], excel_or_csv="csv")
+
+# process32 = concatDataframes(data_path="cus_info_R23_mode.csv", data_path1="cus_info_R23_max.csv", excel_or_csv="csv")
+# process32.process()
+# process32.export(["cus_info_R24.csv"], excel_or_csv="csv")
+
+# process33 = dropUnnamed(data_path="cus_info_R24.csv", excel_or_csv="csv")
+# process33.process()
+# process33.export(["cus_info_R25.csv"], excel_or_csv="csv")
+
+# process34 = dropColumn(data_path="cus_account_R7.csv", excel_or_csv="csv")
+# process34.process(column_name="fc_sec_trd_nat_cd")
+# process34.export(["cus_account_R8.csv"], excel_or_csv="csv")
+
+process35 = removeWhiteSpace(data_path="cus_account_R8.csv", excel_or_csv="csv")
+process35.process(column_name="iem_cd")
+process35.export(["cus_account_R9.csv"], excel_or_csv="csv")
