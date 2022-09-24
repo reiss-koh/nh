@@ -664,3 +664,34 @@ class accLifespan(DataProcess):
             self.df.at[i, "fst_act_opn_dt"] = (today - dateObject).days
 
         self.dfs = [self.df]
+
+class infoToCrossSectMode(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        current_acc = ""
+        self.df1 = pd.DataFrame()
+
+        k = 0
+
+        for i in range(50):
+            print(i)
+            current_acc = self.df.loc[i]["act_no"]
+            mode_memory = []
+            max_memory = []
+
+            for column_name in MODE_COLUMNS:
+                if self.df.loc[i]["act_no"] == current_acc:
+                    mode_memory.append(self.df.loc[i][column_name])
+                elif self.df.loc[i]["act_no"] != current_acc:
+
+                    self.df1.at[k, "act_no"] = current_acc
+
+
+                    mode_memory = []
+                    current_acc = self.df.loc[i]["act_no"]
+                    k += 1
+
+        self.dfs = [self.df1]

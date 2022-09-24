@@ -139,6 +139,13 @@ from data_process_class import *
 # process28.process()
 # process28.export(["cus_info_R22.csv"], excel_or_csv="csv")
 
-process29 = dropUnnamed(data_path="cus_info_R22.csv", excel_or_csv="csv")
-process29.process()
-process29.export(["cus_info_R23.csv"], excel_or_csv="csv")
+# process29 = dropUnnamed(data_path="cus_info_R22.csv", excel_or_csv="csv")
+# process29.process()
+# process29.export(["cus_info_R23.csv"], excel_or_csv="csv")
+
+process30 = infoToCrossSectMode(data_path="cus_info_R22.csv", excel_or_csv="csv")
+process30.process()
+process30.export(["cus_info_R23.csv"], excel_or_csv="csv")
+
+# max
+# combine
