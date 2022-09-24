@@ -40,6 +40,7 @@ class ConvAutoEncoder(nn.Module):
             
             
     def forward(self, x):
+        # print(x.shape)
         output = self.cnn_layer1(x)
         # print(output.shape)
         output = self.cnn_layer2(output)
@@ -51,37 +52,43 @@ class ConvAutoEncoder(nn.Module):
 
         return output
 
-#Autoencoder에 넣어보기 위해 예시 csv 전처리
-df = pd.read_csv(f'{os.getcwd()}/reiss/cus_ifo.csv')
-df = df.iloc[:,3:]
-del df['stk_pdt_hld_yn']
-del df['ose_stk_pdt_hld_yn']
-df = df.iloc[:, :-1]
-df = df.truncate(df.index[0], df.index[50])
 
-#tensor 변환
-data = torch.tensor(df.values, dtype = torch.float32)
+if __name__ == "__main__":
+    #Autoencoder에 넣어보기 위해 예시 csv 전처리
+    df = pd.read_csv(f'{os.getcwd()}/reiss/cus_ifo.csv')
+    df = df.iloc[:,3:]
+    del df['stk_pdt_hld_yn']
+    del df['ose_stk_pdt_hld_yn']
+    df = df.iloc[:, :-1]
+    df = df.truncate(df.index[0], df.index[50])
 
-#convolutional layer input을 위한 transpose
-transpose_input = torch.transpose(data,1,0)
-input_dim = transpose_input.size(0)
+    #tensor 변환
+    data = torch.tensor(df.values, dtype = torch.float32)
 
-#추후 최적화 때 실험할 output dimension 설정
-output_dim = transpose_input.size(1)
+    #convolutional layer input을 위한 transpose
+    transpose_input = torch.transpose(data,1,0)
+    input_dim = transpose_input.size(0)
 
-#모델 통과
-model = ConvAutoEncoder(input_dim, output_dim)
-decoded = model(transpose_input)
-transpose_output = torch.transpose(decoded,1,0)
-print(transpose_output.shape)
-transpose_output = transpose_output.detach().numpy()
+    #추후 최적화 때 실험할 output dimension 설정
+    output_dim = transpose_input.size(0)
 
-#output dimension for T-SNE
-output_dim_t_sne = 3
-t_sne_model = TSNE(output_dim_t_sne)
-t_sne_output = t_sne_model.fit_transform(transpose_output)
+    print("dim:", input_dim, output_dim)
 
-print(t_sne_output)
-print(t_sne_output.shape)
+    #모델 통과
+    model = ConvAutoEncoder(input_dim, output_dim)
+    decoded = model(transpose_input)
+    transpose_output = torch.transpose(decoded,1,0)
+    print("="*50)
+    print(transpose_output.shape)
+    print("="*50)
+    transpose_output = transpose_output.detach().numpy()
+
+    #output dimension for T-SNE
+    output_dim_t_sne = 2
+    t_sne_model = TSNE(output_dim_t_sne)
+    t_sne_output = t_sne_model.fit_transform(transpose_output)
+
+    # print(t_sne_output)
+    print(t_sne_output.shape)
 
 

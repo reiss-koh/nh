@@ -42,31 +42,34 @@ class Autoencoder(nn.Module):
         decoded = self.decoder(encoded)  
         return decoded
 
-#Autoencoder에 넣어보기 위해 예시 csv 전처리
-df = pd.read_csv(f'{os.getcwd()}/reiss/cus_ifo.csv')
-df = df.iloc[:,3:]
-del df['stk_pdt_hld_yn']
-del df['ose_stk_pdt_hld_yn']
-df = df.iloc[:, :-1]
-df = df.truncate(df.index[0], df.index[50])
 
-#tensor 변환
-data = torch.tensor(df.values, dtype = torch.float32)
-input_dim = data.size(1)
+if __name__ == "__main__":
+    #Autoencoder에 넣어보기 위해 예시 csv 전처리
+    df = pd.read_csv(f'{os.getcwd()}/reiss/cus_ifo.csv')
+    df = df.iloc[:,3:]
+    del df['stk_pdt_hld_yn']
+    del df['ose_stk_pdt_hld_yn']
+    df = df.iloc[:, :-1]
+    df = df.truncate(df.index[0], df.index[150])
+    print(df)
 
-#output dimension 설정
-output_dim = data.size(1)
+    #tensor 변환
+    data = torch.tensor(df.values, dtype = torch.float32)
+    input_dim = data.size(1)
 
-#모델 통과
-model = Autoencoder(input_dim, output_dim)
-output = model(data)
-print(output.shape)
-output = output.detach().numpy()
+    #output dimension 설정
+    output_dim = data.size(1)
 
-#output dimension for T-SNE
-output_dim_t_sne = 2
-t_sne_model = TSNE(output_dim_t_sne)
-t_sne_output = t_sne_model.fit_transform(output)
+    #모델 통과
+    model = Autoencoder(input_dim, output_dim)
+    output = model(data)
+    print(output.shape)
+    output = output.detach().numpy()
 
-print(t_sne_output)
-print(t_sne_output.shape)
+    #output dimension for T-SNE
+    output_dim_t_sne = 2
+    t_sne_model = TSNE(output_dim_t_sne)
+    t_sne_output = t_sne_model.fit_transform(output)
+
+    print(t_sne_output)
+    print(t_sne_output.shape)
