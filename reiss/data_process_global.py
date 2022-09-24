@@ -1,4 +1,11 @@
 
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
 def most_frequent(list):
     return max(set(list), key = list.count)
 
@@ -95,3 +102,11 @@ MAX_COLUMNS = ("stk_pdt_hld_yn",
                "mrz_mkt_dit_cd",
                "aet_bse_stk_trd_tp_cd",
                "bas_stk_trd_tp_cd")
+
+DROP_COLUMNS = ("stl_bse_itg_bnc_qty",
+                "stl_bse_fc_now_eal_amt",
+                "itg_byn_cns_qty",
+                "itg_sll_cns_qty",
+                "cns_bse_itg_bnc_qty",
+                "cns_bse_now_eal_amt",
+                "cns_bse_fc_now_eal_amt")

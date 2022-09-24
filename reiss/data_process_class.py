@@ -768,13 +768,78 @@ class getTicker(DataProcess):
 
     def process(self):
         for i in range(self.df_len):
-            print(i)
-            if isinstance(self.df.loc[i]["3m_vol"], int) or isinstance(self.df.loc[i]["3m_vol"], float):
-                continue
+            if self.df.loc[i]["vol_3m"] == "_":
+                print(i)
+                try:
+                    df = investpy.stocks.search_stocks(by='isin', value=str(self.df.loc[i]["iem_cd"]))
+                    ticker = df.loc[0]['symbol']
+                except:
+                    ticker = "_"
+
+                self.df.at[i, "new_ticker"] = ticker
             else:
-                df = investpy.stocks.search_stocks(by='isin', value=str(self.df.loc[i]["iem_cd"]))
-                print(df)
-                ticker = df.loc['symbol'].values[0]
-                print(ticker)
+                self.df.at[i, "new_ticker"] = "__"
+
+        self.dfs = [self.df]
+
+class accountDrop(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for column in DROP_COLUMNS:
+            self.df = self.df.drop([column], axis=1)
+
+        self.dfs = [self.df]
+
+class finalVol3M(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            if isfloat(self.df.loc[i]["vol_3m"]):
+                self.df.at[i, "final_vol_3m"] = self.df.loc[i]["vol_3m"]
+            elif isfloat(self.df.loc[i]["new_vol_3m"]):
+                self.df.at[i, "final_vol_3m"] = self.df.loc[i]["new_vol_3m"]
+            else:
+                self.df.at[i, "final_vol_3m"] = "_"
+
+        self.dfs = [self.df]
+
+class valueWeightedVolatility(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        value_memory = []
+        volatility_memory = []
+
+        current_acc = ""
+        k = 0
+
+        for i in range(self.df_len):
+            print(column_name, i)
+
+            if current_acc == "":
+                current_acc = self.df.loc[i]["act_no"]
+                memory.append(self.df.loc[i][column_name])
+            elif self.df.loc[i]["act_no"] == current_acc:
+                memory.append(self.df.loc[i][column_name])
+            elif self.df.loc[i]["act_no"] != current_acc:
+
+                self.df1.at[k, "act_no"] = current_acc
+                self.df1.at[k, column_name] = most_frequent(memory)
+
+                current_acc = self.df.loc[i]["act_no"]
+                memory = [self.df.loc[i][column_name]]
+
+                k += 1
+
+            if i == self.df_len - 1:
+                self.df1.at[k, "act_no"] = current_acc
+                self.df1.at[k, column_name] = most_frequent(memory)
+
 
         self.dfs = [self.df]

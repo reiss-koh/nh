@@ -167,6 +167,18 @@ from data_process_class import *
 # process35.process(column_name="iem_cd")
 # process35.export(["cus_account_R9.csv"], excel_or_csv="csv")
 
-process36 = getTicker(data_path="cus_account_R9_1.xlsx")
-process36.process()
-process36.export(["cus_account_R10.csv"], excel_or_csv="csv")
+# process36 = getTicker(data_path="cus_account_R10.xlsx")
+# process36.process()
+# process36.export(["cus_account_R11.csv"], excel_or_csv="csv")
+
+# process37 = accountDrop(data_path="cus_account_R12.xlsx")
+# process37.process()
+# process37.export(["cus_account_R13.csv"], excel_or_csv="csv")
+#
+# process38 = dropUnnamed(data_path="cus_account_R13.csv", excel_or_csv="csv")
+# process38.process()
+# process38.export(["cus_account_R14.csv"], excel_or_csv="csv")
+
+process39 = finalVol3M(data_path="cus_account_R14.csv", excel_or_csv="csv")
+process39.process()
+process39.export(["cus_account_R15.csv"], excel_or_csv="csv")
