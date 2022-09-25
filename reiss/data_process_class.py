@@ -750,6 +750,28 @@ class concatDataframes(DataProcess):
 
         self.dfs = [self.df]
 
+class concatDataframes2(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self, column_name=""):
+        self.df1 = self.df1[[column_name]]
+        self.df = pd.concat([self.df, self.df1], axis=1)
+
+        self.dfs = [self.df]
+
+class concatAll(DataProcess):
+    def __init__(self, data_path, data_path1, data_path2, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, data_path2=data_path2, excel_or_csv=excel_or_csv)
+
+    def process(self, path1_column="", path2_column="", path2_column1=""):
+        self.df1 = self.df1[[path1_column]]
+        self.df2 = self.df2[[path2_column, path2_column1]]
+
+        self.df = pd.concat([self.df, self.df1, self.df2], axis=1)
+
+        self.dfs = [self.df]
+
 class removeWhiteSpace(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
@@ -807,79 +829,6 @@ class finalVol3M(DataProcess):
                 self.df.at[i, "final_vol_3m"] = "_"
 
         self.dfs = [self.df]
-
-class valueWeightedVolatility(DataProcess):
-    def __init__(self, data_path, excel_or_csv=""):
-        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
-
-    def process(self):
-        self.df1 = pd.DataFrame()
-        value_memory = []
-        volatility_memory = []
-
-        current_acc = ""
-        k = 0
-
-        for i in range(self.df_len):
-            print(i)
-            if current_acc == "":
-                current_acc = self.df.loc[i]["act_no"]
-                if can_convert_to_int(self.df.loc[i]["stl_bse_now_eal_amt"]) and isfloat(self.df.loc[i]["final_vol_3m"]):
-                    value_memory.append(self.df.loc[i]["stl_bse_now_eal_amt"])
-                    volatility_memory.append(self.df.loc[i]["final_vol_3m"])
-            elif self.df.loc[i]["act_no"] == current_acc:
-                if can_convert_to_int(self.df.loc[i]["stl_bse_now_eal_amt"]) and isfloat(self.df.loc[i]["final_vol_3m"]):
-                    value_memory.append(self.df.loc[i]["stl_bse_now_eal_amt"])
-                    volatility_memory.append(self.df.loc[i]["final_vol_3m"])
-            elif self.df.loc[i]["act_no"] != current_acc:
-                self.df1.at[k, "act_no"] = current_acc
-
-                if len(value_memory) > 0 and len(volatility_memory) > 0:
-                    weight_list = []
-                    sum = np.sum(value_memory)
-
-                    for value in value_memory:
-                        weight_list.append(value/sum)
-
-                    value_weighted_volatility = 0
-                    for j in range(len(volatility_memory)):
-                        value_weighted_volatility += float(volatility_memory[j]) * float(weight_list[j])
-
-                    self.df1.at[k, "value_weighted_volatility"] = value_weighted_volatility
-                else:
-                    self.df1.at[k, "value_weighted_volatility"] = "_"
-
-                value_memory = []
-                volatility_memory = []
-                if can_convert_to_int(self.df.loc[i]["stl_bse_now_eal_amt"]) and isfloat(self.df.loc[i]["final_vol_3m"]):
-                    value_memory.append(self.df.loc[i]["stl_bse_now_eal_amt"])
-                    volatility_memory.append(self.df.loc[i]["final_vol_3m"])
-
-                current_acc = self.df.loc[i]["act_no"]
-                k += 1
-
-            if i == self.df_len - 1:
-                self.df1.at[k, "act_no"] = current_acc
-                if can_convert_to_int(self.df.loc[i]["stl_bse_now_eal_amt"]) and isfloat(self.df.loc[i]["final_vol_3m"]):
-                    value_memory.append(self.df.loc[i]["stl_bse_now_eal_amt"])
-                    volatility_memory.append(self.df.loc[i]["final_vol_3m"])
-
-                if len(value_memory) > 0 and len(volatility_memory) > 0:
-                    weight_list = []
-                    sum = np.sum(value_memory)
-
-                    for value in value_memory:
-                        weight_list.append(value / sum)
-
-                    value_weighted_volatility = 0
-                    for j in range(len(volatility_memory)):
-                        value_weighted_volatility += float(volatility_memory[j]) * float(weight_list[j])
-
-                    self.df1.at[k, "value_weighted_volatility"] = value_weighted_volatility
-                else:
-                    self.df1.at[k, "value_weighted_volatility"] = "_"
-
-        self.dfs = [self.df1]
 
 class valueWeightedVolatility(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):

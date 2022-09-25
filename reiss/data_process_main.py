@@ -187,6 +187,14 @@ from data_process_class import *
 # process40.process()
 # process40.export(["cus_account_R16.csv"], excel_or_csv="csv")
 
-process41 = aggregateLeverage(data_path="cus_account_R15.csv", data_path1="cus_account_R16.csv", excel_or_csv="csv")
-process41.process()
-process41.export(["cus_account_R17.csv"], excel_or_csv="csv")
+# process41 = aggregateLeverage(data_path="cus_account_R15.csv", excel_or_csv="csv")
+# process41.process()
+# process41.export(["cus_account_R17.csv"], excel_or_csv="csv")
+
+# process42 = concatDataframes2(data_path="cus_account_R16.csv", data_path1="cus_account_R17.csv", excel_or_csv="csv")
+# process42.process(column_name="leverage")
+# process42.export(["cus_account_R18.csv"], excel_or_csv="csv")
+
+process43 = concatAll(data_path="cus_info_R25.csv", data_path1="cus_assets_R8.csv", data_path2="cus_account_R18.csv", excel_or_csv="csv")
+process43.process(path1_column="MAX_ASSET_VALUE", path2_column="value_weighted_volatility", path2_column1="leverage")
+process43.export(["all_R1.csv"], excel_or_csv="csv")
