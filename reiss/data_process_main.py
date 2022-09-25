@@ -179,6 +179,14 @@ from data_process_class import *
 # process38.process()
 # process38.export(["cus_account_R14.csv"], excel_or_csv="csv")
 
-process39 = finalVol3M(data_path="cus_account_R14.csv", excel_or_csv="csv")
-process39.process()
-process39.export(["cus_account_R15.csv"], excel_or_csv="csv")
+# process39 = finalVol3M(data_path="cus_account_R14.csv", excel_or_csv="csv")
+# process39.process()
+# process39.export(["cus_account_R15.csv"], excel_or_csv="csv")
+
+# process40 = valueWeightedVolatility(data_path="cus_account_R15.csv", excel_or_csv="csv")
+# process40.process()
+# process40.export(["cus_account_R16.csv"], excel_or_csv="csv")
+
+process41 = aggregateLeverage(data_path="cus_account_R15.csv", data_path1="cus_account_R16.csv", excel_or_csv="csv")
+process41.process()
+process41.export(["cus_account_R17.csv"], excel_or_csv="csv")
