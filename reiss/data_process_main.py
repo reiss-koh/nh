@@ -223,10 +223,10 @@ from data_process_class import *
 # process49.process()
 # process49.export(["all_R7.csv"], excel_or_csv="csv")
 
-process50 = dropColumn(data_path="all_R7.csv", excel_or_csv="csv")
-process50.process(column_name="index")
-process50.export(["all_R8.csv"], excel_or_csv="csv")
-
-process51 = dropUnnamed(data_path="all_R8.csv", excel_or_csv="csv")
-process51.process()
-process51.export(["all_R9.csv"], excel_or_csv="csv")
+# process50 = dropColumn(data_path="all_R7.csv", excel_or_csv="csv")
+# process50.process(column_name="index")
+# process50.export(["all_R8.csv"], excel_or_csv="csv")
+#
+# process51 = dropUnnamed(data_path="all_R8.csv", excel_or_csv="csv")
+# process51.process()
+# process51.export(["all_R9.csv"], excel_or_csv="csv")
