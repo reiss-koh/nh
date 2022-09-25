@@ -172,10 +172,10 @@ class k_clustering():
 if __name__ == "__main__":
     #Autoencoder에 넣어보기 위해 예시 csv 전처리
     #최종 csv 파일을 read_csv만 하면 됨
-    df = pd.read_csv('./reiss/cus_ifo.csv')
+    df = pd.read_csv('all_R9.csv')
     df = df.iloc[:,3:]
-    del df['stk_pdt_hld_yn']
-    del df['ose_stk_pdt_hld_yn']
+    # del df['stk_pdt_hld_yn']
+    # del df['ose_stk_pdt_hld_yn']
     df = df.iloc[:, :-1]
     df = df.truncate(df.index[0], df.index[100])
 
