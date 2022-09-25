@@ -2,6 +2,7 @@ import os
 os.environ["OMP_NUM_THREADS"] = '1'
 import csv
 import sys
+import time
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
@@ -67,7 +68,7 @@ class k_clustering():
         if decoder_dim != None:
             output_dim = decoder_dim
         else:
-            output_dim = transpose_input.size(1)
+            output_dim = transpose_input.size(0)
 
         #모델 통과
         model = conv_autoencoder.ConvAutoEncoder(input_dim, output_dim)
@@ -95,6 +96,8 @@ class k_clustering():
             assert autoencoder_type == "linear" or autoencoder_type == "conv"
 
         print("Clustering input dimension:", clustering_input.shape)
+
+        # sys.exit()
 
         k_means = KMeans(init= "k-means++", n_clusters = num_cluster)
         k_means.fit(clustering_input)
@@ -172,15 +175,20 @@ class k_clustering():
 if __name__ == "__main__":
     #Autoencoder에 넣어보기 위해 예시 csv 전처리
     #최종 csv 파일을 read_csv만 하면 됨
-    df = pd.read_csv('./reiss/cus_ifo.csv')
-    df = df.iloc[:,3:]
-    del df['stk_pdt_hld_yn']
-    del df['ose_stk_pdt_hld_yn']
-    df = df.iloc[:, :-1]
-    df = df.truncate(df.index[0], df.index[100])
+    
+    # df = df.iloc[:,3:]
+    # del df['stk_pdt_hld_yn']
+    # del df['ose_stk_pdt_hld_yn']
+    # df = df.iloc[:, :-1]
+    # df = df.truncate(df.index[0], df.index[100])
 
+    df = pd.read_csv('./all_R9.csv')
+    # print(df)
+    start = time.time()
     model = k_clustering(df, 2)
     #parameter = "linear" or "conv"
-    optimal_num_cluster = model.optimize_clustering('conv')
-    # optimal_num_cluster = 5
+    # optimal_num_cluster = model.optimize_clustering('conv')
+    optimal_num_cluster = 4
     model.k_means_clustering(optimal_num_cluster, "conv")
+    end = time.time()
+    print(end - start)
