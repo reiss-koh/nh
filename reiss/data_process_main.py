@@ -214,3 +214,19 @@ from data_process_class import *
 # process47 = dropColumn(data_path="all_R4.csv", excel_or_csv="csv")
 # process47.process(column_name="act_no.1")
 # process47.export(["all_R5.csv"], excel_or_csv="csv")
+
+# process48 = dropMissingData(data_path="all_R5.csv", excel_or_csv="csv")
+# process48.process()
+# process48.export(["all_R6.csv"], excel_or_csv="csv")
+
+# process49 = processMissingData(data_path="all_R6.csv", excel_or_csv="csv")
+# process49.process()
+# process49.export(["all_R7.csv"], excel_or_csv="csv")
+
+process50 = dropColumn(data_path="all_R7.csv", excel_or_csv="csv")
+process50.process(column_name="index")
+process50.export(["all_R8.csv"], excel_or_csv="csv")
+
+process51 = dropUnnamed(data_path="all_R8.csv", excel_or_csv="csv")
+process51.process()
+process51.export(["all_R9.csv"], excel_or_csv="csv")

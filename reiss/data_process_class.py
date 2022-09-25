@@ -902,3 +902,44 @@ class valueWeightedVolatility(DataProcess):
                     self.df1.at[k, "value_weighted_volatility"] = "_"
 
         self.dfs = [self.df1]
+
+class dropMissingData(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i]["cus_age_stn_cd"] == "_":
+                self.df.drop(index=i, axis=0, inplace=True)
+                continue
+            if self.df.loc[i]["tot_ivs_te_sgm_cd"] == "_":
+                self.df.drop(index=i, axis=0, inplace=True)
+                continue
+            if self.df.loc[i]["value_weighted_volatility"] == "_" or self.df.loc[i]["value_weighted_volatility"] == 0 or self.df.loc[i]["value_weighted_volatility"] == "0":
+                self.df.drop(index=i, axis=0, inplace=True)
+                continue
+
+        self.df.reset_index(inplace=True)
+
+        self.dfs = [self.df]
+
+class processMissingData(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i]["loy_sgm_cd"] == "_":
+                self.df.at[i, "loy_sgm_cd"] = 1
+            if self.df.loc[i]["mrz_pdt_tp_sgm_cd"] == "_":
+                self.df.at[i, "mrz_pdt_tp_sgm_cd"] = 1
+            if self.df.loc[i]["mrz_mkt_dit_cd"] == "_":
+                self.df.at[i, "mrz_mkt_dit_cd"] = 1
+            if self.df.loc[i]["aet_bse_stk_trd_tp_cd"] == "_":
+                self.df.at[i, "aet_bse_stk_trd_tp_cd"] = 1
+            if self.df.loc[i]["bas_stk_trd_tp_cd"] == "_":
+                self.df.at[i, "bas_stk_trd_tp_cd"] = 1
+
+        self.dfs = [self.df]
