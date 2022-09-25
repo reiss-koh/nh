@@ -110,3 +110,4 @@ DROP_COLUMNS = ("stl_bse_itg_bnc_qty",
                 "cns_bse_itg_bnc_qty",
                 "cns_bse_now_eal_amt",
                 "cns_bse_fc_now_eal_amt")
+

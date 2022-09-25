@@ -195,6 +195,22 @@ from data_process_class import *
 # process42.process(column_name="leverage")
 # process42.export(["cus_account_R18.csv"], excel_or_csv="csv")
 
-process43 = concatAll(data_path="cus_info_R25.csv", data_path1="cus_assets_R8.csv", data_path2="cus_account_R18.csv", excel_or_csv="csv")
-process43.process(path1_column="MAX_ASSET_VALUE", path2_column="value_weighted_volatility", path2_column1="leverage")
-process43.export(["all_R1.csv"], excel_or_csv="csv")
+# process43 = concatAll(data_path="cus_info_R25.csv", data_path1="cus_assets_R8.csv", data_path2="cus_account_R18.csv", excel_or_csv="csv")
+# process43.process(path1_column="MAX_ASSET_VALUE", path2_column="value_weighted_volatility", path2_column1="leverage")
+# process43.export(["all_R1.csv"], excel_or_csv="csv")
+
+# process44 = dropColumn(data_path="all_R1.csv", excel_or_csv="csv")
+# process44.process(column_name="SEX_NA")
+# process44.export(["all_R2.csv"], excel_or_csv="csv")
+#
+# process45 = dropColumn(data_path="all_R2.csv", excel_or_csv="csv")
+# process45.process(column_name="LIFESTAGE_NA")
+# process45.export(["all_R3.csv"], excel_or_csv="csv")
+#
+# process46 = dropColumn(data_path="all_R3.csv", excel_or_csv="csv")
+# process46.process(column_name="HOLDINGS_TYPE_NA")
+# process46.export(["all_R4.csv"], excel_or_csv="csv")
+#
+# process47 = dropColumn(data_path="all_R4.csv", excel_or_csv="csv")
+# process47.process(column_name="act_no.1")
+# process47.export(["all_R5.csv"], excel_or_csv="csv")
