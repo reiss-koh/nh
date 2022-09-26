@@ -565,6 +565,12 @@ class mainSectorProcess(DataProcess):
 
         self.df.drop("mrz_btp_dit_cd", axis=1, inplace=True)
 
+        # for i in range(self.df_len):
+        #     print(i)
+        #     for column in self.df:
+        #         if self.df.loc[i][column] == np.nan:
+        #             self.df.at[i, column] = "_"
+
         self.dfs = [self.df]
 
 
@@ -917,6 +923,7 @@ class aggregateLeverage(DataProcess):
             print(i)
             if current_acc == "":
                 leverage += float(self.df.loc[i]["lon_amt"])
+                current_acc = self.df.loc[i]["act_no"]
             elif self.df.loc[i]["act_no"] == current_acc:
                 leverage += float(self.df.loc[i]["lon_amt"])
             elif self.df.loc[i]["act_no"] != current_acc:
@@ -924,7 +931,6 @@ class aggregateLeverage(DataProcess):
                 self.df1.at[k, "leverage"] = leverage
 
                 leverage = 0
-
                 current_acc = self.df.loc[i]["act_no"]
                 k += 1
 
