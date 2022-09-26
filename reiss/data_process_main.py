@@ -90,7 +90,11 @@ from data_process_class import *
 # process16 = lifestageProcess(data_path="cus_info_R11" + ".csv", excel_or_csv="csv")
 # process16.process()
 # process16.export(["cus_info_R12.csv"], excel_or_csv="csv")
-#
+
+# process16 = customerLvlProcess(data_path="cus_info_R12" + ".csv", excel_or_csv="csv")
+# process16.process()
+# process16.export(["cus_info_R13.csv"], excel_or_csv="csv")
+
 # process17 = totalDurationInvestingProcess(data_path="cus_info_R13" + ".csv", excel_or_csv="csv")
 # process17.process()
 # process17.export(["cus_info_R14.csv"], excel_or_csv="csv")
