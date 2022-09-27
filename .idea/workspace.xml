@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="88b9ab7c-1aac-4112-b6c3-992a59ce45c0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NH_FBA.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/NH_FBA.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/all_R9.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/all_R9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/all_R9.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_global.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_global.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664108766629</updated>
       <workItem from="1664108771711" duration="1234000" />
-      <workItem from="1664238103347" duration="7619000" />
+      <workItem from="1664238103347" duration="8734000" />
     </task>
     <servers />
   </component>
