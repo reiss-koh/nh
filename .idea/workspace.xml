@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88b9ab7c-1aac-4112-b6c3-992a59ce45c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/cus_account_R6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/cus_account_R6.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/cus_account_R7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/cus_account_R7.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/cus_account_R8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/cus_account_R8.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NH_FBA.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/NH_FBA.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +21,13 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
     <configuration name="non_hier_clustering" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -64,6 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664108766629</updated>
       <workItem from="1664108771711" duration="1234000" />
+      <workItem from="1664238103347" duration="1048000" />
     </task>
     <servers />
   </component>
