@@ -6,6 +6,7 @@ from data_process_global import *
 from datetime import date, datetime
 import investpy
 from pandas_datareader import data as pdr
+from sklearn.preprocessing import MinMaxScaler
 
 pd.set_option("display.max_columns", None)
 
@@ -978,5 +979,33 @@ class processMissingData(DataProcess):
                 self.df.at[i, "aet_bse_stk_trd_tp_cd"] = 1
             if self.df.loc[i]["bas_stk_trd_tp_cd"] == "_":
                 self.df.at[i, "bas_stk_trd_tp_cd"] = 1
+
+        self.dfs = [self.df]
+
+class oneHotAccount(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        self.df1 = pd.get_dummies(self.df.act_no, prefix='ACCOUNT')
+        self.df = pd.concat([self.df1, self.df], axis=1)
+
+        self.df.drop("act_no", axis=1, inplace=True)
+
+        self.dfs = [self.df]
+
+
+class minMaxScale(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+        scaler = MinMaxScaler()
+
+        columns_list = []
+        for column in self.df:
+            columns_list.append(column)
+
+        self.df = pd.DataFrame(scaler.fit_transform(self.df), columns=columns_list)
 
         self.dfs = [self.df]

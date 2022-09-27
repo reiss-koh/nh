@@ -234,3 +234,16 @@ from data_process_class import *
 # process51 = dropUnnamed(data_path="all_R8.csv", excel_or_csv="csv")
 # process51.process()
 # process51.export(["all_R9.csv"], excel_or_csv="csv")
+
+# R10: Removed accounts in top 0.1% of leverage and/or 0.1% of peak assets
+# process52 = oneHotAccount(data_path="all_R10.csv", excel_or_csv="csv")
+# process52.process()
+# process52.export(["all_R11.csv"], excel_or_csv="csv")
+
+# process53 = minMaxScale(data_path="all_R11.csv", excel_or_csv="csv")
+# process53.process()
+# process53.export(["all_R12.csv"], excel_or_csv="csv")
+
+# process54 = dropUnnamed(data_path="all_R12.csv", excel_or_csv="csv")
+# process54.process()
+# process54.export(["all_R13.csv"], excel_or_csv="csv")

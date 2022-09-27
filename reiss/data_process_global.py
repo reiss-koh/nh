@@ -111,3 +111,18 @@ DROP_COLUMNS = ("stl_bse_itg_bnc_qty",
                 "cns_bse_now_eal_amt",
                 "cns_bse_fc_now_eal_amt")
 
+TO_SCALE = ("access_count",
+            "age_group",
+            "income_group",
+            "account_age",
+            "nh_level",
+            "invest_exp_group",
+            "loyalty",
+            "risk_tolerance",
+            "sophistication",
+            "stock_wealth_level",
+            "trading_frequency",
+            "peak_asset_value",
+            "value_weighted_volatility",
+            "leverage")
+
