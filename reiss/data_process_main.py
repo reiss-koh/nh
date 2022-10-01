@@ -247,3 +247,11 @@ from data_process_class import *
 # process54 = dropUnnamed(data_path="all_R12.csv", excel_or_csv="csv")
 # process54.process()
 # process54.export(["all_R13.csv"], excel_or_csv="csv")
+
+process52 = minMaxScale(data_path="all_R10.csv", excel_or_csv="csv")
+process52.process()
+process52.export(["all_R11.csv"], excel_or_csv="csv")
+
+process53 = dropUnnamed(data_path="all_R11.csv", excel_or_csv="csv")
+process53.process()
+process53.export(["all_R12.csv"], excel_or_csv="csv")
