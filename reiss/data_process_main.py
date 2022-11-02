@@ -248,10 +248,23 @@ from data_process_class import *
 # process54.process()
 # process54.export(["all_R13.csv"], excel_or_csv="csv")
 
-process52 = minMaxScale(data_path="all_R10.csv", excel_or_csv="csv")
-process52.process()
-process52.export(["all_R11.csv"], excel_or_csv="csv")
+# process52 = minMaxScale(data_path="all_R10.csv", excel_or_csv="csv")
+# process52.process()
+# process52.export(["all_R11.csv"], excel_or_csv="csv")
+#
+# process53 = dropUnnamed(data_path="all_R11.csv", excel_or_csv="csv")
+# process53.process()
+# process53.export(["all_R12.csv"], excel_or_csv="csv")
 
-process53 = dropUnnamed(data_path="all_R11.csv", excel_or_csv="csv")
-process53.process()
-process53.export(["all_R12.csv"], excel_or_csv="csv")
+# 본선
+
+# process = groupAndOrder(data_path="GA.csv", excel_or_csv="csv")
+# process.process(group_by="CUS_NO", order_by="VISIT_DATE")
+# process.export(["GA1.csv"], excel_or_csv="csv")
+
+# process1 = mapCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
+# process1.process(unique_column="cus_no")
+# process1.export(["MAP_CUS_ACC.csv"], excel_or_csv="csv")
+
+process2 = readData(data_path="GA.csv", excel_or_csv="csv")
+process2.process()

@@ -9,41 +9,131 @@ from pandas_datareader import data as pdr
 from sklearn.preprocessing import MinMaxScaler
 
 pd.set_option("display.max_columns", None)
+pd.set_option('display.max_rows', 100)
 
+# for 예선
 
+# class DataProcess(object):
+#     def __init__(self, data_path, excel_or_csv="", data_path1="", data_path2="", data_path3="", data_path4="",
+#                  data_path5="", data_path6="", data_path7="", data_path8="", data_path9=""):
+#
+#         if excel_or_csv == "csv":
+#             self.df = pd.read_csv(data_path, sep=',', encoding='unicode_escape')
+#             self.df_list = [self.df]
+#             if data_path1 != "":
+#                 self.df1 = pd.read_csv(data_path1, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df1)
+#             if data_path2 != "":
+#                 self.df2 = pd.read_csv(data_path2, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df2)
+#             if data_path3 != "":
+#                 self.df3 = pd.read_csv(data_path3, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df3)
+#             if data_path4 != "":
+#                 self.df4 = pd.read_csv(data_path4, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df4)
+#             if data_path5 != "":
+#                 self.df5 = pd.read_csv(data_path5, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df5)
+#             if data_path6 != "":
+#                 self.df6 = pd.read_csv(data_path6, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df6)
+#             if data_path7 != "":
+#                 self.df7 = pd.read_csv(data_path7, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df7)
+#             if data_path8 != "":
+#                 self.df8 = pd.read_csv(data_path8, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df8)
+#             if data_path9 != "":
+#                 self.df9 = pd.read_csv(data_path9, sep=',', encoding='unicode_escape')
+#                 self.df_list.append(self.df9)
+#         else:
+#             self.df = pd.read_excel(data_path)
+#             self.df_list = [self.df]
+#             if data_path1 != "":
+#                 self.df1 = pd.read_excel(data_path1)
+#                 self.df_list.append(self.df1)
+#             if data_path2 != "":
+#                 self.df2 = pd.read_excel(data_path2)
+#                 self.df_list.append(self.df2)
+#             if data_path3 != "":
+#                 self.df3 = pd.read_excel(data_path3)
+#                 self.df_list.append(self.df3)
+#             if data_path4 != "":
+#                 self.df4 = pd.read_excel(data_path4)
+#                 self.df_list.append(self.df4)
+#             if data_path5 != "":
+#                 self.df5 = pd.read_excel(data_path5)
+#                 self.df_list.append(self.df5)
+#             if data_path6 != "":
+#                 self.df6 = pd.read_excel(data_path6)
+#                 self.df_list.append(self.df6)
+#             if data_path7 != "":
+#                 self.df7 = pd.read_excel(data_path7)
+#                 self.df_list.append(self.df7)
+#             if data_path8 != "":
+#                 self.df8 = pd.read_excel(data_path8)
+#                 self.df_list.append(self.df8)
+#             if data_path9 != "":
+#                 self.df9 = pd.read_excel(data_path9)
+#                 self.df_list.append(self.df9)
+#
+#         self.df_len = len(self.df)
+#
+#     # dfs: data frames
+#     # dps: data paths
+#     def export(self, dps, excel_or_csv=""):
+#         if len(dps) == len(self.dfs):
+#
+#             if excel_or_csv == "csv":
+#                 for i in range(len(self.dfs)):
+#                     self.dfs[i].to_csv(dps[i])
+#                 print("Exported To:", dps)
+#
+#             else:
+#                 for i in range(len(self.dfs)):
+#                     self.dfs[i].to_excel(dps[i])
+#                 print("Exported To:", dps)
+#
+#         else:
+#             print("Incorrect Number of Data Paths")
+#             print("Data Paths: ", len(dps))
+#             print("Data Frames: ", len(self.dfs))
+
+# for 본선
 class DataProcess(object):
     def __init__(self, data_path, excel_or_csv="", data_path1="", data_path2="", data_path3="", data_path4="",
                  data_path5="", data_path6="", data_path7="", data_path8="", data_path9=""):
 
         if excel_or_csv == "csv":
-            self.df = pd.read_csv(data_path, sep=',', encoding='unicode_escape')
+            self.df = pd.read_csv(data_path, encoding='utf-8', sep=',')
             self.df_list = [self.df]
             if data_path1 != "":
-                self.df1 = pd.read_csv(data_path1, sep=',', encoding='unicode_escape')
+                self.df1 = pd.read_csv(data_path1, encoding='utf-8', sep=',')
                 self.df_list.append(self.df1)
             if data_path2 != "":
-                self.df2 = pd.read_csv(data_path2, sep=',', encoding='unicode_escape')
+                self.df2 = pd.read_csv(data_path2, encoding='utf-8', sep=',')
                 self.df_list.append(self.df2)
             if data_path3 != "":
-                self.df3 = pd.read_csv(data_path3, sep=',', encoding='unicode_escape')
+                self.df3 = pd.read_csv(data_path3, encoding='utf-8', sep=',')
                 self.df_list.append(self.df3)
             if data_path4 != "":
-                self.df4 = pd.read_csv(data_path4, sep=',', encoding='unicode_escape')
+                self.df4 = pd.read_csv(data_path4, encoding='utf-8', sep=',')
                 self.df_list.append(self.df4)
             if data_path5 != "":
-                self.df5 = pd.read_csv(data_path5, sep=',', encoding='unicode_escape')
+                self.df5 = pd.read_csv(data_path5, encoding='utf-8', sep=',')
                 self.df_list.append(self.df5)
             if data_path6 != "":
-                self.df6 = pd.read_csv(data_path6, sep=',', encoding='unicode_escape')
+                self.df6 = pd.read_csv(data_path6, encoding='utf-8', sep=',')
                 self.df_list.append(self.df6)
             if data_path7 != "":
-                self.df7 = pd.read_csv(data_path7, sep=',', encoding='unicode_escape')
+                self.df7 = pd.read_csv(data_path7, encoding='utf-8', sep=',')
                 self.df_list.append(self.df7)
             if data_path8 != "":
-                self.df8 = pd.read_csv(data_path8, sep=',', encoding='unicode_escape')
+                self.df8 = pd.read_csv(data_path8, encoding='utf-8', sep=',')
                 self.df_list.append(self.df8)
             if data_path9 != "":
-                self.df9 = pd.read_csv(data_path9, sep=',', encoding='unicode_escape')
+                self.df9 = pd.read_csv(data_path9, encoding='utf-8', sep=',')
                 self.df_list.append(self.df9)
         else:
             self.df = pd.read_excel(data_path)
@@ -97,7 +187,6 @@ class DataProcess(object):
             print("Incorrect Number of Data Paths")
             print("Data Paths: ", len(dps))
             print("Data Frames: ", len(self.dfs))
-
 
 class customerAccount(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
@@ -1007,5 +1096,67 @@ class minMaxScale(DataProcess):
             columns_list.append(column)
 
         self.df = pd.DataFrame(scaler.fit_transform(self.df), columns=columns_list)
+
+        self.dfs = [self.df]
+
+class groupAndOrder(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, group_by="CUS_NO", order_by="VISIT_DATE"):
+        self.df_output = pd.DataFrame()
+
+        unique_cus = []
+
+        while len(unique_cus) < 3:
+            current_cus = ""
+            for i in range(100000):
+                print(unique_cus, i)
+
+                if current_cus == "" and self.df.loc[i][group_by] not in unique_cus:
+                    unique_cus.append(self.df.loc[i][group_by])
+                    current_cus = self.df.loc[i][group_by]
+
+                    self.df_temp = pd.DataFrame()
+                    self.df_temp = self.df.iloc[[i], :]
+                elif current_cus == self.df.loc[i][group_by]:
+                    self.df_temp = self.df_temp.append(self.df.iloc[[i], :], ignore_index=True)
+
+            self.df_temp = self.df_temp.sort_values(by=order_by, ascending=True)
+            self.df_output = self.df_output.append(self.df_temp, ignore_index=True)
+
+            print(self.df_temp)
+
+        self.dfs = [self.df_output]
+
+class mapCusAcc(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, unique_column="cus_no"):
+
+        self.df = self.df[["cus_no", "act_no"]]
+        current_cus = ""
+
+        for i in range(self.df_len):
+            print(i)
+            if current_cus == "":
+                current_cus = self.df.loc[i][unique_column]
+            elif current_cus == self.df.loc[i][unique_column]:
+                self.df.drop(index=i, axis=0, inplace=True)
+            elif current_cus != self.df.loc[i][unique_column]:
+                current_cus = self.df.loc[i][unique_column]
+
+        self.df.reset_index(inplace=True)
+
+        self.dfs = [self.df]
+
+class readData(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        print(self.df)
 
         self.dfs = [self.df]
