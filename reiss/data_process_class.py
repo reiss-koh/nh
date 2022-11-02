@@ -1108,11 +1108,10 @@ class groupAndOrder(DataProcess):
 
         unique_cus = []
 
-        while len(unique_cus) < 3:
+        while len(unique_cus) <= 10000:
             current_cus = ""
-            for i in range(100000):
-                print(unique_cus, i)
-
+            print(len(unique_cus))
+            for i in range(self.df_len):
                 if current_cus == "" and self.df.loc[i][group_by] not in unique_cus:
                     unique_cus.append(self.df.loc[i][group_by])
                     current_cus = self.df.loc[i][group_by]

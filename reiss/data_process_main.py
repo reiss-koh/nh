@@ -258,13 +258,13 @@ from data_process_class import *
 
 # 본선
 
-# process = groupAndOrder(data_path="GA.csv", excel_or_csv="csv")
-# process.process(group_by="CUS_NO", order_by="VISIT_DATE")
-# process.export(["GA1.csv"], excel_or_csv="csv")
+process = groupAndOrder(data_path="GA.csv", excel_or_csv="csv")
+process.process(group_by="CUS_NO", order_by="VISIT_DATE")
+process.export(["GA1.csv"], excel_or_csv="csv")
 
 # process1 = mapCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
 # process1.process(unique_column="cus_no")
 # process1.export(["MAP_CUS_ACC.csv"], excel_or_csv="csv")
 
-process2 = readData(data_path="GA.csv", excel_or_csv="csv")
-process2.process()
+# process2 = readData(data_path="GA.csv", excel_or_csv="csv")
+# process2.process()
