@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88b9ab7c-1aac-4112-b6c3-992a59ce45c0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/reiss/eda.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -31,7 +36,7 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Python.data_process_main">
+  <component name="RunManager" selected="Python.eda">
     <configuration name="data_process_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="nh" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -46,6 +51,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reiss/data_process_main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="eda" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="nh" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/reiss" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reiss/eda.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -78,6 +105,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.eda" />
         <item itemvalue="Python.data_process_main" />
         <item itemvalue="Python.non_hier_clustering" />
       </list>
@@ -96,14 +124,29 @@
       <workItem from="1667197353745" duration="5000" />
       <workItem from="1667268517603" duration="2068000" />
       <workItem from="1667348586649" duration="13959000" />
+      <workItem from="1667373869353" duration="1119000" />
+      <workItem from="1667436371083" duration="1397000" />
+      <workItem from="1667528115100" duration="310000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/nh$eda.coverage" NAME="eda Coverage Results" MODIFIED="1667528318706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
     <SUITE FILE_PATH="coverage/nh$non_hier_clustering.coverage" NAME="non_hier_clustering Coverage Results" MODIFIED="1664109934410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/nh$data_process_main.coverage" NAME="data_process_main Coverage Results" MODIFIED="1667366174408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
+    <SUITE FILE_PATH="coverage/nh$data_process_main.coverage" NAME="data_process_main Coverage Results" MODIFIED="1667373938289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
   </component>
 </project>
