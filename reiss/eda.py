@@ -7,6 +7,6 @@ import investpy
 from pandas_datareader import data as pdr
 from pandas_profiling import ProfileReport
 
-df = pd.read_csv("GA.csv", encoding='utf-8', delimiter='|')
+df = pd.read_csv("GA.csv", encoding='utf-8', sep=',')
 profile = ProfileReport(df, title="Report")
 profile.to_file("GA.html")
