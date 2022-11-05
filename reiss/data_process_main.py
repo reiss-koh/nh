@@ -258,7 +258,11 @@ from data_process_class import *
 
 # 본선
 
-process = groupAndOrder(data_path="GA.csv", excel_or_csv="csv")
+# process = groupAndOrder(data_path="GA.csv", excel_or_csv="csv")
+# process.process(group_by="CUS_NO", order_by="VISIT_DATE")
+# process.export(["GA1.csv"], excel_or_csv="csv")
+
+process = group(data_path="GA.csv", excel_or_csv="csv")
 process.process(group_by="CUS_NO", order_by="VISIT_DATE")
 process.export(["GA1.csv"], excel_or_csv="csv")
 

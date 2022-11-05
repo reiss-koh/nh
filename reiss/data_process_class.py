@@ -1099,6 +1099,7 @@ class minMaxScale(DataProcess):
 
         self.dfs = [self.df]
 
+# Aweful Algorithm
 class groupAndOrder(DataProcess):
     def __init__(self, data_path, excel_or_csv=""):
         super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
@@ -1125,6 +1126,30 @@ class groupAndOrder(DataProcess):
             self.df_output = self.df_output.append(self.df_temp, ignore_index=True)
 
             print(self.df_temp)
+
+        self.dfs = [self.df_output]
+
+# Version 2
+class group(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self, group_by="CUS_NO"):
+        self.df_output = pd.DataFrame()
+
+        index_dict = {}
+
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i][group_by] not in index_dict:
+                index_dict[self.df.loc[i][group_by]] = [i]
+            else:
+                index_dict[self.df.loc[i][group_by]].append(i)
+
+        for arr in index_dict.values():
+            print(arr)
+            for i in arr:
+                self.df_output = self.df_output.append(self.df.iloc[[i], :], ignore_index=True)
 
         self.dfs = [self.df_output]
 
