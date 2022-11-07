@@ -285,6 +285,9 @@ from data_process_class import *
 
 # map GA1 cus_no to acc_no in data_final.csv
 
-process4 = mapGA(data_path="GA1.csv", data_path1="MAP_CUS_ACC.csv", excel_or_csv="csv")
-process4.process()
-process4.export(["GA2.csv"], excel_or_csv="csv")
+# process4 = mapGA(data_path="GA1.csv", data_path1="MAP_CUS_ACC.csv", excel_or_csv="csv")
+# process4.process()
+# process4.export(["GA2.csv"], excel_or_csv="csv")
+
+process5 = readData(data_path="GA2.csv", excel_or_csv="csv")
+process5.process()
