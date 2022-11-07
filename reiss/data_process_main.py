@@ -262,9 +262,13 @@ from data_process_class import *
 # process.process(group_by="CUS_NO", order_by="VISIT_DATE")
 # process.export(["GA1.csv"], excel_or_csv="csv")
 
-process = group(data_path="GA.csv", excel_or_csv="csv")
-process.process(group_by="CUS_NO", order_by="VISIT_DATE")
-process.export(["GA1.csv"], excel_or_csv="csv")
+# group customers together
+
+# process = group(data_path="GA.csv", excel_or_csv="csv")
+# process.process(group_by="CUS_NO", order_by="VISIT_DATE")
+# process.export(["GA1.csv"], excel_or_csv="csv")
+
+# map customers and accounts
 
 # process1 = mapCusAcc(data_path="cus_info_R2.csv", excel_or_csv="csv")
 # process1.process(unique_column="cus_no")
@@ -272,3 +276,15 @@ process.export(["GA1.csv"], excel_or_csv="csv")
 
 # process2 = readData(data_path="GA.csv", excel_or_csv="csv")
 # process2.process()
+
+# count unique number of customers
+
+# process3 = uniqueCus(data_path="GA1.csv", excel_or_csv="csv")
+# process3.process()
+# output: 8061 unique customers
+
+# map GA1 cus_no to acc_no in data_final.csv
+
+process4 = mapGA(data_path="GA1.csv", data_path1="MAP_CUS_ACC.csv", excel_or_csv="csv")
+process4.process()
+process4.export(["GA2.csv"], excel_or_csv="csv")

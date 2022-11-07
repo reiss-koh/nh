@@ -5,6 +5,8 @@ from scipy import stats
 from data_process_global import *
 from datetime import date, datetime
 import investpy
+import threading
+import time
 from pandas_datareader import data as pdr
 from sklearn.preprocessing import MinMaxScaler
 
@@ -1182,5 +1184,41 @@ class readData(DataProcess):
     def process(self):
 
         print(self.df)
+
+        self.dfs = [self.df]
+
+class uniqueCus(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df = self.df[["CUS_NO"]]
+        unique = []
+
+        for i in range(self.df_len):
+            print(i)
+            if self.df.loc[i]["CUS_NO"] not in unique:
+                unique.append(self.df.loc[i]["CUS_NO"])
+
+        print(len(unique))
+
+        self.dfs = [self.df]
+
+class mapGA(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        map_dict = {}
+
+        for i in range(len(self.df1)):
+            print(i)
+            map_dict[self.df1.loc[i]["cus_no"]] = i
+
+        for i in range(self.df_len):
+            print(i)
+            self.df.at[i, "CUS_NO"] = map_dict[self.df.loc[i]["CUS_NO"]]
 
         self.dfs = [self.df]
