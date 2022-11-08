@@ -7,6 +7,7 @@ from datetime import date, datetime
 import investpy
 import threading
 import time
+import multiprocessing
 from pandas_datareader import data as pdr
 from sklearn.preprocessing import MinMaxScaler
 
@@ -1300,7 +1301,7 @@ class totalAdv(DataProcess):
 
         self.df1.set_index('act_no', inplace=True)
 
-        ai_keywords = ("ETN", "공매도", "CFD", "코넥스", "K-OTC", "ELW", "선물", "옵션")
+        mat_keywords = ("ETN", "공매도", "CFD", "코넥스", "K-OTC", "ELW", "선물", "옵션")
 
         cus = ""
         duration_sum = 0
@@ -1309,14 +1310,14 @@ class totalAdv(DataProcess):
             print("Adv", i)
             if cus == "":
                 cus = self.df.loc[i]["CUS_NO"]
-                for keyword in ai_keywords:
+                for keyword in mat_keywords:
                     if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
                             self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
                             str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
                         duration_sum += self.df.loc[i]["DURATION_SUM"]
                         break
             elif cus == self.df.loc[i]["CUS_NO"]:
-                for keyword in ai_keywords:
+                for keyword in mat_keywords:
                     if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
                             self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
                             str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
@@ -1328,7 +1329,7 @@ class totalAdv(DataProcess):
                 cus = self.df.loc[i]["CUS_NO"]
                 duration_sum = 0
 
-                for keyword in ai_keywords:
+                for keyword in mat_keywords:
                     if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
                             self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
                             str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
@@ -1345,7 +1346,7 @@ class totalAI(DataProcess):
 
         self.df1.set_index('act_no', inplace=True)
 
-        ai_keywords = ("AI PICK3", "AI분석보기", "알고리즘", "로보어카운트", "로보랩")
+        mat_keywords = ("AI PICK3", "AI분석보기", "알고리즘", "로보어카운트", "로보랩")
 
         cus = ""
         duration_sum = 0
@@ -1354,14 +1355,14 @@ class totalAI(DataProcess):
             print("AI", i)
             if cus == "":
                 cus = self.df.loc[i]["CUS_NO"]
-                for keyword in ai_keywords:
+                for keyword in mat_keywords:
                     if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
                             self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
                             str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
                         duration_sum += self.df.loc[i]["DURATION_SUM"]
                         break
             elif cus == self.df.loc[i]["CUS_NO"]:
-                for keyword in ai_keywords:
+                for keyword in mat_keywords:
                     if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
                             self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
                             str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
@@ -1373,7 +1374,7 @@ class totalAI(DataProcess):
                 cus = self.df.loc[i]["CUS_NO"]
                 duration_sum = 0
 
-                for keyword in ai_keywords:
+                for keyword in mat_keywords:
                     if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
                             self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
                             str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
@@ -1391,3 +1392,96 @@ class combine(DataProcess):
         self.df = pd.concat([self.df, self.df1[["TOTAL_AI"]]], axis=1)
 
         self.dfs = [self.df]
+
+class totalNonTrading(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df1.set_index('act_no', inplace=True)
+
+        mat_keywords = ("펀드", "ELS", "DLS", "CMA", "MMW", "RP", "포트폴리오", "퇴직", "연금", "IRP", "ISA")
+
+        cus = ""
+        duration_sum = 0
+
+        for i in range(self.df_len):
+            print("NTP", i)
+            if cus == "":
+                cus = self.df.loc[i]["CUS_NO"]
+                for keyword in mat_keywords:
+                    if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
+                            self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
+                            str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
+                        duration_sum += self.df.loc[i]["DURATION_SUM"]
+                        break
+            elif cus == self.df.loc[i]["CUS_NO"]:
+                for keyword in mat_keywords:
+                    if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
+                            self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
+                            str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
+                        duration_sum += self.df.loc[i]["DURATION_SUM"]
+                        break
+            elif cus != self.df.loc[i]["CUS_NO"]:
+                self.df1.at[cus, "TOTAL_NTP"] = duration_sum
+
+                cus = self.df.loc[i]["CUS_NO"]
+                duration_sum = 0
+
+                for keyword in mat_keywords:
+                    if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
+                            self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
+                            str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
+                        duration_sum += self.df.loc[i]["DURATION_SUM"]
+                        break
+
+        self.dfs = [self.df1]
+
+class totalMaterial(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df1.set_index('act_no', inplace=True)
+
+        mat_keywords = ("지수/선물", "매매동향", "예상지수", "업종지수",
+                        "투자컨텐츠", "시황안내", "Dart전자공시", "투자캘린더",
+                        "맞춤형투자정보", "리포트", "브리프", "투자전략",
+                        "기업분석", "사업분석", "FICC", "자산과리솔루션", "뉴스")
+
+        cus = ""
+        duration_sum = 0
+
+        for i in range(self.df_len):
+            print("MAT", i)
+            if cus == "":
+                cus = self.df.loc[i]["CUS_NO"]
+                for keyword in mat_keywords:
+                    if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
+                            self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
+                            str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
+                        duration_sum += self.df.loc[i]["DURATION_SUM"]
+                        break
+            elif cus == self.df.loc[i]["CUS_NO"]:
+                for keyword in mat_keywords:
+                    if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
+                            self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
+                            str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
+                        duration_sum += self.df.loc[i]["DURATION_SUM"]
+                        break
+            elif cus != self.df.loc[i]["CUS_NO"]:
+                self.df1.at[cus, "TOTAL_MAT"] = duration_sum
+
+                cus = self.df.loc[i]["CUS_NO"]
+                duration_sum = 0
+
+                for keyword in mat_keywords:
+                    if keyword in str(self.df.loc[i]["SCREENNAME"]) or keyword in str(
+                            self.df.loc[i]["EVENTCATEGORY"]) or keyword in \
+                            str(self.df.loc[i]["EVENTACTION"]) or keyword in str(self.df.loc[i]["EVENTLABEL"]):
+                        duration_sum += self.df.loc[i]["DURATION_SUM"]
+                        break
+
+        self.dfs = [self.df1]
