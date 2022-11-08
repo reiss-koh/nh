@@ -1252,4 +1252,41 @@ class sumByCus(DataProcess):
                 duration_sum = 0
                 view_cnt_sum = 0
 
+                duration_sum += self.df.loc[i][col]
+                view_cnt_sum += self.df.loc[i][col1]
+
+        self.dfs = [self.df1]
+
+class totalForeign(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df1.set_index('act_no', inplace=True)
+
+        cus = ""
+        duration_sum = 0
+
+        for i in range(self.df_len):
+            print(i)
+            if cus == "":
+                cus = self.df.loc[i]["CUS_NO"]
+                if "해외" in self.df.loc[i]["SCREENNAME"] or "해외" in self.df.loc[i]["EVENTCATEGORY"] or "해외" in \
+                        self.df.loc[i]["EVENTACTION"] or "해외" in self.df.loc[i]["EVENTLABEL"]:
+                    duration_sum += self.df.loc[i]["DURATION_SUM"]
+            elif cus == self.df.loc[i]["CUS_NO"]:
+                if "해외" in self.df.loc[i]["SCREENNAME"] or "해외" in self.df.loc[i]["EVENTCATEGORY"] or "해외" in \
+                        self.df.loc[i]["EVENTACTION"] or "해외" in self.df.loc[i]["EVENTLABEL"]:
+                    duration_sum += self.df.loc[i]["DURATION_SUM"]
+            elif cus != self.df.loc[i]["CUS_NO"]:
+                self.df1.at[cus, "TOTAL_FOREIGN"] = duration_sum
+
+                cus = self.df.loc[i]["CUS_NO"]
+                duration_sum = 0
+
+                if "해외" in self.df.loc[i]["SCREENNAME"] or "해외" in self.df.loc[i]["EVENTCATEGORY"] or "해외" in \
+                        self.df.loc[i]["EVENTACTION"] or "해외" in self.df.loc[i]["EVENTLABEL"]:
+                    duration_sum += self.df.loc[i]["DURATION_SUM"]
+
         self.dfs = [self.df1]
