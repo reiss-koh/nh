@@ -289,5 +289,11 @@ from data_process_class import *
 # process4.process()
 # process4.export(["GA2.csv"], excel_or_csv="csv")
 
-process5 = readData(data_path="GA2.csv", excel_or_csv="csv")
-process5.process()
+# process5 = readData(data_path="GA2.csv", excel_or_csv="csv")
+# process5.process()
+
+# map GA1 cus_no to acc_no in data_final.csv
+
+process6 = sumByCus(data_path="GA2.csv", data_path1="all_R10.csv", excel_or_csv="csv")
+process6.process(col="DURATION_SUM", col1="VIEW_CNT")
+process6.export(["all_R10_1.csv"], excel_or_csv="csv")

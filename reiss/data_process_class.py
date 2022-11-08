@@ -1222,3 +1222,34 @@ class mapGA(DataProcess):
             self.df.at[i, "CUS_NO"] = map_dict[self.df.loc[i]["CUS_NO"]]
 
         self.dfs = [self.df]
+
+class sumByCus(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self, col="DURATION_SUM", col1="VIEW_CNT"):
+
+        self.df1.set_index('act_no', inplace=True)
+
+        cus = ""
+        duration_sum = 0
+        view_cnt_sum = 0
+
+        for i in range(self.df_len):
+            print(i)
+            if cus == "":
+                cus = self.df.loc[i]["CUS_NO"]
+                duration_sum += self.df.loc[i][col]
+                view_cnt_sum += self.df.loc[i][col1]
+            elif cus == self.df.loc[i]["CUS_NO"]:
+                duration_sum += self.df.loc[i][col]
+                view_cnt_sum += self.df.loc[i][col1]
+            elif cus != self.df.loc[i]["CUS_NO"]:
+                self.df1.at[cus, "TOTAL_DURATION"] = duration_sum
+                self.df1.at[cus, "TOTAL_VIEW_CNT"] = view_cnt_sum
+
+                cus = self.df.loc[i]["CUS_NO"]
+                duration_sum = 0
+                view_cnt_sum = 0
+
+        self.dfs = [self.df1]
