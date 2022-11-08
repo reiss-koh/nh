@@ -302,10 +302,24 @@ from data_process_class import *
 # process7.process()
 # process7.export(["all_R10_2.csv"], excel_or_csv="csv")
 
-process8 = totalAdv(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
-process8.process()
-process8.export(["all_R10_3.csv"], excel_or_csv="csv")
+# def func_process8():
+#     process8 = totalAdv(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+#     process8.process()
+#     process8.export(["all_R10_3.csv"], excel_or_csv="csv")
+# TODO need to redo totalAI with 로보랩
+# def func_process9():
+#     process9 = totalAI(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+#     process9.process()
+#     process9.export(["all_R10_3_1.csv"], excel_or_csv="csv")
+#
+# t8 = threading.Thread(target=func_process8)
+# t9 = threading.Thread(target=func_process9)
+# t8.start()
+# t9.start()
 
-# process9 = totalAI(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
-# process9.process()
-# process9.export(["all_R10_3_1.csv"], excel_or_csv="csv")
+# def func_process10():
+#     process10 = combine(data_path="all_R10_3.csv", data_path1="all_R10_3_1.csv", excel_or_csv="csv")
+#     process10.process()
+#     process10.export(["all_R10_4.csv"], excel_or_csv="csv")
+#
+# func_process10()

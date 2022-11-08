@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="88b9ab7c-1aac-4112-b6c3-992a59ce45c0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reiss/GA1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/GA1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reiss/data_process_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reiss/data_process_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reiss/data_process_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,6 +160,7 @@
       <workItem from="1667884151861" duration="682000" />
       <workItem from="1667885051318" duration="1056000" />
       <workItem from="1667886585815" duration="3602000" />
+      <workItem from="1667900322019" duration="884000" />
     </task>
     <servers />
   </component>
@@ -172,10 +177,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/nh$data_process_test.coverage" NAME="data_process_test Coverage Results" MODIFIED="1667886766673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
     <SUITE FILE_PATH="coverage/nh$eda.coverage" NAME="eda Coverage Results" MODIFIED="1667884169914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
+    <SUITE FILE_PATH="coverage/nh$data_process_test.coverage" NAME="data_process_test Coverage Results" MODIFIED="1667900396619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
     <SUITE FILE_PATH="coverage/nh$non_hier_clustering.coverage" NAME="non_hier_clustering Coverage Results" MODIFIED="1664109934410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/nh$data_process_main.coverage" NAME="data_process_main Coverage Results" MODIFIED="1667885360827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reiss" />
   </component>

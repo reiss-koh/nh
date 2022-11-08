@@ -1306,7 +1306,7 @@ class totalAdv(DataProcess):
         duration_sum = 0
 
         for i in range(self.df_len):
-            print(i)
+            print("Adv", i)
             if cus == "":
                 cus = self.df.loc[i]["CUS_NO"]
                 for keyword in ai_keywords:
@@ -1345,13 +1345,13 @@ class totalAI(DataProcess):
 
         self.df1.set_index('act_no', inplace=True)
 
-        ai_keywords = ("AI PICK3", "AI분석보기", "알고리즘", "로보어카운트")
+        ai_keywords = ("AI PICK3", "AI분석보기", "알고리즘", "로보어카운트", "로보랩")
 
         cus = ""
         duration_sum = 0
 
         for i in range(self.df_len):
-            print(i)
+            print("AI", i)
             if cus == "":
                 cus = self.df.loc[i]["CUS_NO"]
                 for keyword in ai_keywords:
@@ -1368,7 +1368,7 @@ class totalAI(DataProcess):
                         duration_sum += self.df.loc[i]["DURATION_SUM"]
                         break
             elif cus != self.df.loc[i]["CUS_NO"]:
-                self.df1.at[cus, "TOTAL_ADV"] = duration_sum
+                self.df1.at[cus, "TOTAL_AI"] = duration_sum
 
                 cus = self.df.loc[i]["CUS_NO"]
                 duration_sum = 0
@@ -1381,3 +1381,13 @@ class totalAI(DataProcess):
                         break
 
         self.dfs = [self.df1]
+
+class combine(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        self.df = pd.concat([self.df, self.df1[["TOTAL_AI"]]], axis=1)
+
+        self.dfs = [self.df]
