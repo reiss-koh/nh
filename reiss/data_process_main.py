@@ -298,6 +298,14 @@ from data_process_class import *
 # process6.process(col="DURATION_SUM", col1="VIEW_CNT")
 # process6.export(["all_R10_1.csv"], excel_or_csv="csv")
 
-process7 = totalForeign(data_path="GA2.csv", data_path1="all_R10_1.csv", excel_or_csv="csv")
-process7.process()
-process7.export(["all_R10_2.csv"], excel_or_csv="csv")
+# process7 = totalForeign(data_path="GA2.csv", data_path1="all_R10_1.csv", excel_or_csv="csv")
+# process7.process()
+# process7.export(["all_R10_2.csv"], excel_or_csv="csv")
+
+process8 = totalAdv(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+process8.process()
+process8.export(["all_R10_3.csv"], excel_or_csv="csv")
+
+# process9 = totalAI(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+# process9.process()
+# process9.export(["all_R10_3_1.csv"], excel_or_csv="csv")

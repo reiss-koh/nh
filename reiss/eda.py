@@ -7,7 +7,7 @@ import investpy
 from pandas_datareader import data as pdr
 from pandas_profiling import ProfileReport
 
-df = pd.read_csv("GA1.csv", encoding='utf-8', sep=',')
+df = pd.read_csv("GA2.csv", encoding='utf-8', sep=',')
 profile = ProfileReport(df, title="Report")
 profile.to_file("GA.html")
 profile.to_file("GA.json")
