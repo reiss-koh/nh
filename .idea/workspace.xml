@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="88b9ab7c-1aac-4112-b6c3-992a59ce45c0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/data_process_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/data_process_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reiss/eda.py" beforeDir="false" afterPath="$PROJECT_DIR$/reiss/eda.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +155,7 @@
       <workItem from="1667868838971" duration="10385000" />
       <workItem from="1667884151861" duration="682000" />
       <workItem from="1667885051318" duration="1056000" />
-      <workItem from="1667886585815" duration="3530000" />
+      <workItem from="1667886585815" duration="3602000" />
     </task>
     <servers />
   </component>
