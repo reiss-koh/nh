@@ -310,10 +310,10 @@ from data_process_class import *
 # t8 = threading.Thread(target=func_process8)
 # t8.start()
 
-def func_process9():
-    process9 = totalAI(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
-    process9.process()
-    process9.export(["all_R10_3_1.csv"], excel_or_csv="csv")
+# def func_process9():
+#     process9 = totalAI(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+#     process9.process()
+#     process9.export(["all_R10_3_1.csv"], excel_or_csv="csv")
 
 # def func_process10():
 #     process10 = combine(data_path="all_R10_3.csv", data_path1="all_R10_3_1.csv", excel_or_csv="csv")
@@ -322,31 +322,38 @@ def func_process9():
 #
 # func_process10()
 
-def func_process11():
-    process11 = totalNonTrading(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
-    process11.process()
-    process11.export(["all_R10_3_2.csv"], excel_or_csv="csv")
-
-def func_process12():
-    process12 = totalMaterial(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
-    process12.process()
-    process12.export(["all_R10_3_3.csv"], excel_or_csv="csv")
+# def func_process11():
+#     process11 = totalNonTrading(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+#     process11.process()
+#     process11.export(["all_R10_3_2.csv"], excel_or_csv="csv")
+#
+# def func_process12():
+#     process12 = totalMaterial(data_path="GA2.csv", data_path1="all_R10_2.csv", excel_or_csv="csv")
+#     process12.process()
+#     process12.export(["all_R10_3_3.csv"], excel_or_csv="csv")
 
 # check for top-level environment
 if __name__ == '__main__':
     start_time = time.time()
 
-    p9 = multiprocessing.Process(target=func_process9)
-    p9.start()
+    # p9 = multiprocessing.Process(target=func_process9)
+    # p9.start()
+    #
+    # p11 = multiprocessing.Process(target=func_process11)
+    # p11.start()
+    #
+    # p12 = multiprocessing.Process(target=func_process12)
+    # p12.start()
+    #
+    # p9.join()
+    # p11.join()
+    # p12.join()
 
-    p11 = multiprocessing.Process(target=func_process11)
-    p11.start()
+    def func_process13():
+        process10 = combine(data_path="all_R10_3.csv", data_path1="all_R10_3_1.csv", data_path2="all_R10_3_2.csv", data_path3="all_R10_3_3.csv", excel_or_csv="csv")
+        process10.process()
+        process10.export(["all_R10_4.csv"], excel_or_csv="csv")
 
-    p12 = multiprocessing.Process(target=func_process12)
-    p12.start()
-
-    p9.join()
-    p11.join()
-    p12.join()
+    func_process13()
 
     print("--- %s seconds ---" % (time.time() - start_time))

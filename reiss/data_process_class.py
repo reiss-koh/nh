@@ -1384,12 +1384,14 @@ class totalAI(DataProcess):
         self.dfs = [self.df1]
 
 class combine(DataProcess):
-    def __init__(self, data_path, data_path1, excel_or_csv=""):
-        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+    def __init__(self, data_path, data_path1, data_path2, data_path3, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, data_path2=data_path2, data_path3=data_path3, excel_or_csv=excel_or_csv)
 
     def process(self):
 
         self.df = pd.concat([self.df, self.df1[["TOTAL_AI"]]], axis=1)
+        self.df = pd.concat([self.df, self.df2[["TOTAL_NTP"]]], axis=1)
+        self.df = pd.concat([self.df, self.df3[["TOTAL_MAT"]]], axis=1)
 
         self.dfs = [self.df]
 
