@@ -332,21 +332,34 @@ from data_process_class import *
 #     process12.process()
 #     process12.export(["all_R10_3_3.csv"], excel_or_csv="csv")
 
-def func_process13():
-    process13 = combine(data_path="all_R10_3.csv", data_path1="all_R10_3_1.csv", data_path2="all_R10_3_2.csv",
-                        data_path3="all_R10_3_3.csv", excel_or_csv="csv")
-    process13.process()
-    process13.export(["all_R10_4.csv"], excel_or_csv="csv")
+# def func_process13():
+#     process13 = combine(data_path="all_R10_3.csv", data_path1="all_R10_3_1.csv", data_path2="all_R10_3_2.csv",
+#                         data_path3="all_R10_3_3.csv", excel_or_csv="csv")
+#     process13.process()
+#     process13.export(["all_R10_4.csv"], excel_or_csv="csv")
+
+    # df = pd.read_csv("all_R10_4.csv", encoding='utf-8', sep=',')
+    # profile = ProfileReport(df, title="Report")
+    # profile.to_file("all_R10_4.html")
+
+# replace all NaN with _ on Excel
+# remove acc number 9731 due to TOTAL_NTP outlier
+# drop missing rows
 
 def func_process14():
-    process14 = minMaxScale(data_path="all_R10_4.csv", excel_or_csv="csv")
+    process14 = outlierAndDrop(data_path="all_R10_4.csv", excel_or_csv="csv")
     process14.process()
     process14.export(["all_R10_5.csv"], excel_or_csv="csv")
 
 def func_process15():
-    process15 = dropUnnamed(data_path="all_R10_5.csv", excel_or_csv="csv")
+    process15 = minMaxScale(data_path="all_R10_5.csv", excel_or_csv="csv")
     process15.process()
     process15.export(["all_R10_6.csv"], excel_or_csv="csv")
+
+def func_process16():
+    process16 = dropUnnamed(data_path="all_R10_6.csv", excel_or_csv="csv")
+    process16.process()
+    process16.export(["all_R10_7.csv"], excel_or_csv="csv")
 
 # check for top-level environment
 if __name__ == '__main__':
@@ -365,7 +378,8 @@ if __name__ == '__main__':
     # p11.join()
     # p12.join()
 
-    func_process13()
-    func_process14()
+    # func_process14()
+    # func_process15()
+    func_process16()
 
     print("--- %s seconds ---" % (time.time() - start_time))

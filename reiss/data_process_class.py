@@ -10,6 +10,7 @@ import time
 import multiprocessing
 from pandas_datareader import data as pdr
 from sklearn.preprocessing import MinMaxScaler
+from pandas_profiling import ProfileReport
 
 pd.set_option("display.max_columns", None)
 pd.set_option('display.max_rows', None)
@@ -445,7 +446,7 @@ class dropUnnamed(DataProcess):
     def process(self):
 
         for column in self.df:
-            if "Unnamed" in column:
+            if "Unnamed" in column or "index" in column:
                 self.df = self.df.drop([column], axis=1)
 
         self.dfs = [self.df]
@@ -1487,3 +1488,18 @@ class totalMaterial(DataProcess):
                         break
 
         self.dfs = [self.df1]
+
+
+class outlierAndDrop(DataProcess):
+    def __init__(self, data_path, excel_or_csv=""):
+        super().__init__(data_path=data_path, excel_or_csv=excel_or_csv)
+
+    def process(self):
+
+        for i in range(self.df_len):
+            if self.df.loc[i]["access_count"] == "_" or self.df.loc[i]["TOTAL_DURATION"] == "_" or self.df.loc[i]["act_no"] == 9731:
+                self.df.drop(index=i, axis=0, inplace=True)
+
+        self.df.reset_index(inplace=True)
+
+        self.dfs = [self.df]
