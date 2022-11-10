@@ -235,7 +235,7 @@ class k_clustering():
 if __name__ == '__main__':
     start_time = time.time()
 
-    df = pd.read_csv('all_R10_7.csv')
+    df = pd.read_csv('본선_data_final.csv')
     df = df.iloc[:, 1:]
     dims = [2, 3]
     for dim in dims:
@@ -246,7 +246,7 @@ if __name__ == '__main__':
         # optimal_num_cluster = 4
         # model.k_means_clustering(optimal_num_cluster, "conv")
 
-    df = pd.read_csv('all_R10_7.csv')
+    df = pd.read_csv('본선_data_final.csv')
     df = df.iloc[:, 1:]
     model = k_clustering(df, 2)
     # parameter = "linear" or "conv"
