@@ -559,6 +559,12 @@ def func_process56():
     profile = ProfileReport(df, title="Report")
     profile.to_file("cluster4_unmapped.html")
 
+def func_process57():
+    df = pd.read_csv("all_R10_5.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("main_unmapped.html")
+
+
 # check for top-level environment
 if __name__ == '__main__':
     start_time = time.time()
@@ -723,25 +729,26 @@ if __name__ == '__main__':
     # p51.join()
     # p52.join()
 
-    p53 = multiprocessing.Process(target=func_process53)
-    p53.start()
-
-    p54 = multiprocessing.Process(target=func_process54)
-    p54.start()
-
-    p55 = multiprocessing.Process(target=func_process55)
-    p55.start()
-
-    p56 = multiprocessing.Process(target=func_process56)
-    p56.start()
-
-    p53.join()
-    p54.join()
-    p55.join()
-    p56.join()
+    # p53 = multiprocessing.Process(target=func_process53)
+    # p53.start()
+    #
+    # p54 = multiprocessing.Process(target=func_process54)
+    # p54.start()
+    #
+    # p55 = multiprocessing.Process(target=func_process55)
+    # p55.start()
+    #
+    # p56 = multiprocessing.Process(target=func_process56)
+    # p56.start()
+    #
+    # p53.join()
+    # p54.join()
+    # p55.join()
+    # p56.join()
 
     # func_process14()
     # func_process15()
     # func_process16()
+    func_process57()
 
     print("--- %s seconds ---" % (time.time() - start_time))
