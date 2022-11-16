@@ -1522,7 +1522,7 @@ class unMappedCluster(DataProcess):
                            "trading_frequency",
                            "age_group"]]
 
-        self.df1 = self.df1[["account_number",
+        self.df1 = self.df1[["act_no",
                              "TOTAL_VIEW_CNT",
                              "value_weighted_volatility",
                              "peak_asset_value",
@@ -1533,16 +1533,16 @@ class unMappedCluster(DataProcess):
                              "trading_frequency",
                              "age_group"]]
 
-        map_dict = {}
-
-        for i in range(self.df_len):
-            map_dict[i] = self.df.loc[i]["act_no"]
-
-        self.df.set_index('act_no', inplace=True)
+        # map_dict = {}
+        #
+        # for i in range(self.df_len):
+        #     map_dict[i] = self.df.loc[i]["act_no"]
+        #
+        # self.df.set_index('act_no', inplace=True)
         for i in range(len(self.df1)):
             print(i)
             for feature in TOP9_FEATURES:
-                acc_no = int(self.df1.loc[i]["account_number"])
-                self.df_output.at[i, feature] = self.df.loc[map_dict[acc_no]][feature]
+                acc_no = int(self.df1.loc[i]["act_no"])
+                self.df_output.at[i, feature] = self.df.loc[acc_no][feature]
 
         self.dfs = [self.df_output]

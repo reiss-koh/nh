@@ -360,82 +360,82 @@ from data_process_class import *
 #     process16.export(["all_R10_7.csv"], excel_or_csv="csv")
 
 def func_process17():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster1.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster1_subcluster1.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster1_sub1_unmapped.csv"], excel_or_csv="csv")
 
 def func_process18():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster2.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster1_subcluster2.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster1_sub2_unmapped.csv"], excel_or_csv="csv")
 
 def func_process19():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster3.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster1_subcluster3.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster1_sub3_unmapped.csv"], excel_or_csv="csv")
 
 def func_process20():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster4.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster1_subcluster4.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster1_sub4_unmapped.csv"], excel_or_csv="csv")
 
 def func_process21():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster1.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster2_subcluster1.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster2_sub1_unmapped.csv"], excel_or_csv="csv")
 
 def func_process22():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster2.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster2_subcluster2.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster2_sub2_unmapped.csv"], excel_or_csv="csv")
 
 def func_process23():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster3.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster2_subcluster3.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster2_sub3_unmapped.csv"], excel_or_csv="csv")
 
 def func_process24():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster4.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster2_subcluster4.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster2_sub4_unmapped.csv"], excel_or_csv="csv")
 
 def func_process25():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster1.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster3_subcluster1.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster3_sub1_unmapped.csv"], excel_or_csv="csv")
 
 def func_process26():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster2.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster3_subcluster2.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster3_sub2_unmapped.csv"], excel_or_csv="csv")
 
 def func_process27():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster3.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster3_subcluster3.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster3_sub3_unmapped.csv"], excel_or_csv="csv")
 
 def func_process28():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster4.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster3_subcluster4.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster3_sub4_unmapped.csv"], excel_or_csv="csv")
 
 def func_process29():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster1.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster4_subcluster1.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster4_sub1_unmapped.csv"], excel_or_csv="csv")
 
 def func_process30():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster2.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster4_subcluster2.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster4_sub2_unmapped.csv"], excel_or_csv="csv")
 
 def func_process31():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster3.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster4_subcluster3.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster4_sub3_unmapped.csv"], excel_or_csv="csv")
 
 def func_process32():
-    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster4.csv", excel_or_csv="csv")
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster4_subcluster4.csv", excel_or_csv="csv")
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster4_sub4_unmapped.csv"], excel_or_csv="csv")
 
@@ -548,11 +548,6 @@ if __name__ == '__main__':
     # p20 = multiprocessing.Process(target=func_process20)
     # p20.start()
     #
-    # p17.join()
-    # p18.join()
-    # p19.join()
-    # p20.join()
-    #
     # p21 = multiprocessing.Process(target=func_process21)
     # p21.start()
     #
@@ -564,11 +559,6 @@ if __name__ == '__main__':
     #
     # p24 = multiprocessing.Process(target=func_process24)
     # p24.start()
-    #
-    # p21.join()
-    # p22.join()
-    # p23.join()
-    # p24.join()
     #
     # p25 = multiprocessing.Process(target=func_process25)
     # p25.start()
@@ -582,11 +572,6 @@ if __name__ == '__main__':
     # p28 = multiprocessing.Process(target=func_process28)
     # p28.start()
     #
-    # p25.join()
-    # p26.join()
-    # p27.join()
-    # p28.join()
-
     # p29 = multiprocessing.Process(target=func_process29)
     # p29.start()
     #
@@ -599,6 +584,18 @@ if __name__ == '__main__':
     # p32 = multiprocessing.Process(target=func_process32)
     # p32.start()
     #
+    # p17.join()
+    # p18.join()
+    # p19.join()
+    # p20.join()
+    # p21.join()
+    # p22.join()
+    # p23.join()
+    # p24.join()
+    # p25.join()
+    # p26.join()
+    # p27.join()
+    # p28.join()
     # p29.join()
     # p30.join()
     # p31.join()
