@@ -519,6 +519,46 @@ def func_process48():
     profile = ProfileReport(df, title="Report")
     profile.to_file("cluster4_sub4_unmapped.html")
 
+def func_process49():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster1.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster1_unmapped.csv"], excel_or_csv="csv")
+
+def func_process50():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster2.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster2_unmapped.csv"], excel_or_csv="csv")
+
+def func_process51():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster3.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster3_unmapped.csv"], excel_or_csv="csv")
+
+def func_process52():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster Files/FBA_Finals_cluster4.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster4_unmapped.csv"], excel_or_csv="csv")
+
+def func_process53():
+    df = pd.read_csv("cluster1_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster1_unmapped.html")
+
+def func_process54():
+    df = pd.read_csv("cluster2_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster2_unmapped.html")
+
+def func_process55():
+    df = pd.read_csv("cluster3_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster3_unmapped.html")
+
+def func_process56():
+    df = pd.read_csv("cluster4_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster4_unmapped.html")
+
 # check for top-level environment
 if __name__ == '__main__':
     start_time = time.time()
@@ -601,70 +641,104 @@ if __name__ == '__main__':
     # p31.join()
     # p32.join()
 
-    p33 = multiprocessing.Process(target=func_process33)
-    p33.start()
+    # p33 = multiprocessing.Process(target=func_process33)
+    # p33.start()
+    #
+    # p34 = multiprocessing.Process(target=func_process34)
+    # p34.start()
+    #
+    # p35 = multiprocessing.Process(target=func_process35)
+    # p35.start()
+    #
+    # p36 = multiprocessing.Process(target=func_process36)
+    # p36.start()
+    #
+    # p37 = multiprocessing.Process(target=func_process37)
+    # p37.start()
+    #
+    # p38 = multiprocessing.Process(target=func_process38)
+    # p38.start()
+    #
+    # p39 = multiprocessing.Process(target=func_process39)
+    # p39.start()
+    #
+    # p40 = multiprocessing.Process(target=func_process40)
+    # p40.start()
+    #
+    # p41 = multiprocessing.Process(target=func_process41)
+    # p41.start()
+    #
+    # p42 = multiprocessing.Process(target=func_process42)
+    # p42.start()
+    #
+    # p43 = multiprocessing.Process(target=func_process43)
+    # p43.start()
+    #
+    # p44 = multiprocessing.Process(target=func_process44)
+    # p44.start()
+    #
+    # p45 = multiprocessing.Process(target=func_process45)
+    # p45.start()
+    #
+    # p46 = multiprocessing.Process(target=func_process46)
+    # p46.start()
+    #
+    # p47 = multiprocessing.Process(target=func_process47)
+    # p47.start()
+    #
+    # p48 = multiprocessing.Process(target=func_process48)
+    # p48.start()
+    #
+    # p33.join()
+    # p34.join()
+    # p35.join()
+    # p36.join()
+    # p37.join()
+    # p38.join()
+    # p39.join()
+    # p40.join()
+    # p41.join()
+    # p42.join()
+    # p43.join()
+    # p44.join()
+    # p45.join()
+    # p46.join()
+    # p47.join()
+    # p48.join()
 
-    p34 = multiprocessing.Process(target=func_process34)
-    p34.start()
+    # p49 = multiprocessing.Process(target=func_process49)
+    # p49.start()
+    #
+    # p50 = multiprocessing.Process(target=func_process50)
+    # p50.start()
+    #
+    # p51 = multiprocessing.Process(target=func_process51)
+    # p51.start()
+    #
+    # p52 = multiprocessing.Process(target=func_process52)
+    # p52.start()
+    #
+    # p49.join()
+    # p50.join()
+    # p51.join()
+    # p52.join()
 
-    p35 = multiprocessing.Process(target=func_process35)
-    p35.start()
+    p53 = multiprocessing.Process(target=func_process53)
+    p53.start()
 
-    p36 = multiprocessing.Process(target=func_process36)
-    p36.start()
+    p54 = multiprocessing.Process(target=func_process54)
+    p54.start()
 
-    p37 = multiprocessing.Process(target=func_process37)
-    p37.start()
+    p55 = multiprocessing.Process(target=func_process55)
+    p55.start()
 
-    p38 = multiprocessing.Process(target=func_process38)
-    p38.start()
+    p56 = multiprocessing.Process(target=func_process56)
+    p56.start()
 
-    p39 = multiprocessing.Process(target=func_process39)
-    p39.start()
-
-    p40 = multiprocessing.Process(target=func_process40)
-    p40.start()
-
-    p41 = multiprocessing.Process(target=func_process41)
-    p41.start()
-
-    p42 = multiprocessing.Process(target=func_process42)
-    p42.start()
-
-    p43 = multiprocessing.Process(target=func_process43)
-    p43.start()
-
-    p44 = multiprocessing.Process(target=func_process44)
-    p44.start()
-
-    p45 = multiprocessing.Process(target=func_process45)
-    p45.start()
-
-    p46 = multiprocessing.Process(target=func_process46)
-    p46.start()
-
-    p47 = multiprocessing.Process(target=func_process47)
-    p47.start()
-
-    p48 = multiprocessing.Process(target=func_process48)
-    p48.start()
-
-    p33.join()
-    p34.join()
-    p35.join()
-    p36.join()
-    p37.join()
-    p38.join()
-    p39.join()
-    p40.join()
-    p41.join()
-    p42.join()
-    p43.join()
-    p44.join()
-    p45.join()
-    p46.join()
-    p47.join()
-    p48.join()
+    p53.join()
+    p54.join()
+    p55.join()
+    p56.join()
 
     # func_process14()
     # func_process15()
