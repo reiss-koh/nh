@@ -1,16 +1,11 @@
-p25 = multiprocessing.Process(target=func_process25)
-p25.start()
+p45 = multiprocessing.Process(target=func_process45)
+p45.start()
 
-p26 = multiprocessing.Process(target=func_process26)
-p26.start()
+p46 = multiprocessing.Process(target=func_process46)
+p46.start()
 
-p27 = multiprocessing.Process(target=func_process27)
-p27.start()
+p47 = multiprocessing.Process(target=func_process47)
+p47.start()
 
-p28 = multiprocessing.Process(target=func_process28)
-p28.start()
-
-p25.join()
-p26.join()
-p27.join()
-p28.join()
+p48 = multiprocessing.Process(target=func_process48)
+p48.start()

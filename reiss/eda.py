@@ -10,4 +10,4 @@ from pandas_profiling import ProfileReport
 df = pd.read_csv("GA2.csv", encoding='utf-8', sep=',')
 profile = ProfileReport(df, title="Report")
 profile.to_file("GA.html")
-profile.to_file("GA.json")
+

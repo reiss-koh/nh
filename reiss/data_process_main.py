@@ -419,6 +419,106 @@ def func_process28():
     process.process(TOP9_FEATURES=TOP9_FEATURES)
     process.export(["cluster3_sub4_unmapped.csv"], excel_or_csv="csv")
 
+def func_process29():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster1.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster4_sub1_unmapped.csv"], excel_or_csv="csv")
+
+def func_process30():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster2.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster4_sub2_unmapped.csv"], excel_or_csv="csv")
+
+def func_process31():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster3.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster4_sub3_unmapped.csv"], excel_or_csv="csv")
+
+def func_process32():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster4/FBA_Finals_cluster4_subcluster4.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster4_sub4_unmapped.csv"], excel_or_csv="csv")
+
+def func_process33():
+    df = pd.read_csv("cluster1_sub1_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster1_sub1_unmapped.html")
+
+def func_process34():
+    df = pd.read_csv("cluster1_sub2_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster1_sub2_unmapped.html")
+
+def func_process35():
+    df = pd.read_csv("cluster1_sub3_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster1_sub3_unmapped.html")
+
+def func_process36():
+    df = pd.read_csv("cluster1_sub4_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster1_sub4_unmapped.html")
+
+def func_process37():
+    df = pd.read_csv("cluster2_sub1_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster2_sub1_unmapped.html")
+
+def func_process38():
+    df = pd.read_csv("cluster2_sub2_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster2_sub2_unmapped.html")
+
+def func_process39():
+    df = pd.read_csv("cluster2_sub3_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster2_sub3_unmapped.html")
+
+def func_process40():
+    df = pd.read_csv("cluster2_sub4_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster2_sub4_unmapped.html")
+
+def func_process41():
+    df = pd.read_csv("cluster3_sub1_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster3_sub1_unmapped.html")
+
+def func_process42():
+    df = pd.read_csv("cluster3_sub2_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster3_sub2_unmapped.html")
+
+def func_process43():
+    df = pd.read_csv("cluster3_sub3_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster3_sub3_unmapped.html")
+
+def func_process44():
+    df = pd.read_csv("cluster3_sub4_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster3_sub4_unmapped.html")
+
+def func_process45():
+    df = pd.read_csv("cluster4_sub1_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster4_sub1_unmapped.html")
+
+def func_process46():
+    df = pd.read_csv("cluster4_sub2_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster4_sub2_unmapped.html")
+
+def func_process47():
+    df = pd.read_csv("cluster4_sub3_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster4_sub3_unmapped.html")
+
+def func_process48():
+    df = pd.read_csv("cluster4_sub4_unmapped.csv", encoding='utf-8', sep=',')
+    profile = ProfileReport(df, title="Report")
+    profile.to_file("cluster4_sub4_unmapped.html")
+
 # check for top-level environment
 if __name__ == '__main__':
     start_time = time.time()
@@ -486,6 +586,88 @@ if __name__ == '__main__':
     # p26.join()
     # p27.join()
     # p28.join()
+
+    # p29 = multiprocessing.Process(target=func_process29)
+    # p29.start()
+    #
+    # p30 = multiprocessing.Process(target=func_process30)
+    # p30.start()
+    #
+    # p31 = multiprocessing.Process(target=func_process31)
+    # p31.start()
+    #
+    # p32 = multiprocessing.Process(target=func_process32)
+    # p32.start()
+    #
+    # p29.join()
+    # p30.join()
+    # p31.join()
+    # p32.join()
+
+    p33 = multiprocessing.Process(target=func_process33)
+    p33.start()
+
+    p34 = multiprocessing.Process(target=func_process34)
+    p34.start()
+
+    p35 = multiprocessing.Process(target=func_process35)
+    p35.start()
+
+    p36 = multiprocessing.Process(target=func_process36)
+    p36.start()
+
+    p37 = multiprocessing.Process(target=func_process37)
+    p37.start()
+
+    p38 = multiprocessing.Process(target=func_process38)
+    p38.start()
+
+    p39 = multiprocessing.Process(target=func_process39)
+    p39.start()
+
+    p40 = multiprocessing.Process(target=func_process40)
+    p40.start()
+
+    p41 = multiprocessing.Process(target=func_process41)
+    p41.start()
+
+    p42 = multiprocessing.Process(target=func_process42)
+    p42.start()
+
+    p43 = multiprocessing.Process(target=func_process43)
+    p43.start()
+
+    p44 = multiprocessing.Process(target=func_process44)
+    p44.start()
+
+    p45 = multiprocessing.Process(target=func_process45)
+    p45.start()
+
+    p46 = multiprocessing.Process(target=func_process46)
+    p46.start()
+
+    p47 = multiprocessing.Process(target=func_process47)
+    p47.start()
+
+    p48 = multiprocessing.Process(target=func_process48)
+    p48.start()
+
+    p33.join()
+    p34.join()
+    p35.join()
+    p36.join()
+    p37.join()
+    p38.join()
+    p39.join()
+    p40.join()
+    p41.join()
+    p42.join()
+    p43.join()
+    p44.join()
+    p45.join()
+    p46.join()
+    p47.join()
+    p48.join()
 
     # func_process14()
     # func_process15()
