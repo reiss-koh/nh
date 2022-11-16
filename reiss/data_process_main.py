@@ -344,20 +344,80 @@ from data_process_class import *
 # remove acc number 9731 due to TOTAL_NTP outlier
 # drop missing rows
 
-def func_process14():
-    process14 = outlierAndDrop(data_path="all_R10_4.csv", excel_or_csv="csv")
-    process14.process()
-    process14.export(["all_R10_5.csv"], excel_or_csv="csv")
+# def func_process14():
+#     process14 = outlierAndDrop(data_path="all_R10_4.csv", excel_or_csv="csv")
+#     process14.process()
+#     process14.export(["all_R10_5.csv"], excel_or_csv="csv")
+#
+# def func_process15():
+#     process15 = minMaxScale(data_path="all_R10_5.csv", excel_or_csv="csv")
+#     process15.process()
+#     process15.export(["all_R10_6.csv"], excel_or_csv="csv")
+#
+# def func_process16():
+#     process16 = dropUnnamed(data_path="all_R10_6.csv", excel_or_csv="csv")
+#     process16.process()
+#     process16.export(["all_R10_7.csv"], excel_or_csv="csv")
 
-def func_process15():
-    process15 = minMaxScale(data_path="all_R10_5.csv", excel_or_csv="csv")
-    process15.process()
-    process15.export(["all_R10_6.csv"], excel_or_csv="csv")
+def func_process17():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster1.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster1_sub1_unmapped.csv"], excel_or_csv="csv")
 
-def func_process16():
-    process16 = dropUnnamed(data_path="all_R10_6.csv", excel_or_csv="csv")
-    process16.process()
-    process16.export(["all_R10_7.csv"], excel_or_csv="csv")
+def func_process18():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster2.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster1_sub2_unmapped.csv"], excel_or_csv="csv")
+
+def func_process19():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster3.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster1_sub3_unmapped.csv"], excel_or_csv="csv")
+
+def func_process20():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster1/FBA_Finals_cluster1_subcluster4.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster1_sub4_unmapped.csv"], excel_or_csv="csv")
+
+def func_process21():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster1.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster2_sub1_unmapped.csv"], excel_or_csv="csv")
+
+def func_process22():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster2.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster2_sub2_unmapped.csv"], excel_or_csv="csv")
+
+def func_process23():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster3.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster2_sub3_unmapped.csv"], excel_or_csv="csv")
+
+def func_process24():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster2/FBA_Finals_cluster2_subcluster4.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster2_sub4_unmapped.csv"], excel_or_csv="csv")
+
+def func_process25():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster1.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster3_sub1_unmapped.csv"], excel_or_csv="csv")
+
+def func_process26():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster2.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster3_sub2_unmapped.csv"], excel_or_csv="csv")
+
+def func_process27():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster3.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster3_sub3_unmapped.csv"], excel_or_csv="csv")
+
+def func_process28():
+    process = unMappedCluster(data_path="all_R10_5.csv", data_path1="Cluster3/FBA_Finals_cluster3_subcluster4.csv", excel_or_csv="csv")
+    process.process(TOP9_FEATURES=TOP9_FEATURES)
+    process.export(["cluster3_sub4_unmapped.csv"], excel_or_csv="csv")
 
 # check for top-level environment
 if __name__ == '__main__':
@@ -376,8 +436,59 @@ if __name__ == '__main__':
     # p11.join()
     # p12.join()
 
+    # p17 = multiprocessing.Process(target=func_process17)
+    # p17.start()
+    #
+    # p18 = multiprocessing.Process(target=func_process18)
+    # p18.start()
+    #
+    # p19 = multiprocessing.Process(target=func_process19)
+    # p19.start()
+    #
+    # p20 = multiprocessing.Process(target=func_process20)
+    # p20.start()
+    #
+    # p17.join()
+    # p18.join()
+    # p19.join()
+    # p20.join()
+    #
+    # p21 = multiprocessing.Process(target=func_process21)
+    # p21.start()
+    #
+    # p22 = multiprocessing.Process(target=func_process22)
+    # p22.start()
+    #
+    # p23 = multiprocessing.Process(target=func_process23)
+    # p23.start()
+    #
+    # p24 = multiprocessing.Process(target=func_process24)
+    # p24.start()
+    #
+    # p21.join()
+    # p22.join()
+    # p23.join()
+    # p24.join()
+    #
+    # p25 = multiprocessing.Process(target=func_process25)
+    # p25.start()
+    #
+    # p26 = multiprocessing.Process(target=func_process26)
+    # p26.start()
+    #
+    # p27 = multiprocessing.Process(target=func_process27)
+    # p27.start()
+    #
+    # p28 = multiprocessing.Process(target=func_process28)
+    # p28.start()
+    #
+    # p25.join()
+    # p26.join()
+    # p27.join()
+    # p28.join()
+
     # func_process14()
     # func_process15()
-    func_process16()
+    # func_process16()
 
     print("--- %s seconds ---" % (time.time() - start_time))

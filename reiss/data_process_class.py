@@ -1503,3 +1503,46 @@ class outlierAndDrop(DataProcess):
         self.df.reset_index(inplace=True)
 
         self.dfs = [self.df]
+
+class unMappedCluster(DataProcess):
+    def __init__(self, data_path, data_path1, excel_or_csv=""):
+        super().__init__(data_path=data_path, data_path1=data_path1, excel_or_csv=excel_or_csv)
+
+    def process(self, TOP9_FEATURES=()):
+        self.df_output = pd.DataFrame()
+
+        self.df = self.df[["act_no",
+                           "TOTAL_VIEW_CNT",
+                           "value_weighted_volatility",
+                           "peak_asset_value",
+                           "TOTAL_DURATION",
+                           "account_age",
+                           "TOTAL_FOREIGN",
+                           "TOTAL_MAT",
+                           "trading_frequency",
+                           "age_group"]]
+
+        self.df1 = self.df1[["account_number",
+                             "TOTAL_VIEW_CNT",
+                             "value_weighted_volatility",
+                             "peak_asset_value",
+                             "TOTAL_DURATION",
+                             "account_age",
+                             "TOTAL_FOREIGN",
+                             "TOTAL_MAT",
+                             "trading_frequency",
+                             "age_group"]]
+
+        map_dict = {}
+
+        for i in range(self.df_len):
+            map_dict[i] = self.df.loc[i]["act_no"]
+
+        self.df.set_index('act_no', inplace=True)
+        for i in range(len(self.df1)):
+            print(i)
+            for feature in TOP9_FEATURES:
+                acc_no = int(self.df1.loc[i]["account_number"])
+                self.df_output.at[i, feature] = self.df.loc[map_dict[acc_no]][feature]
+
+        self.dfs = [self.df_output]

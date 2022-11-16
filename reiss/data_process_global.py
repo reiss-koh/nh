@@ -126,3 +126,12 @@ TO_SCALE = ("access_count",
             "value_weighted_volatility",
             "leverage")
 
+TOP9_FEATURES = ("TOTAL_VIEW_CNT",
+                 "value_weighted_volatility",
+                 "peak_asset_value",
+                 "TOTAL_DURATION",
+                 "account_age",
+                 "TOTAL_FOREIGN",
+                 "TOTAL_MAT",
+                 "trading_frequency",
+                 "age_group")
